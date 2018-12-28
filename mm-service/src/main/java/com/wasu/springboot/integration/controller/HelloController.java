@@ -1,4 +1,4 @@
-package com.wasu.demo.controller;
+package com.wasu.springboot.integration.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
