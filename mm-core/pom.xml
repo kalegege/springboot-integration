@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wasu</groupId>
-	<artifactId>mm-service</artifactId>
+	<artifactId>mm-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mm-service</name>
+	<name>mm-core</name>
 	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 
@@ -22,14 +22,32 @@
 	</properties>
 
 	<dependencies>
+		<!--springcloud-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-boot-starter-eureka</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-boot-starter-config</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-boot-starter-ribbon</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-redis</artifactId>-->
+		<!--</dependency>-->
+
 		<dependency>
-			<groupId>com.wasu</groupId>
-			<artifactId>mm-entity</artifactId>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>com.wasu</groupId>
+			<artifactId>mm-entity</artifactId>
 		</dependency>
 
 		<dependency>
