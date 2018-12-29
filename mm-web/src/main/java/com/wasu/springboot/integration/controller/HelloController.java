@@ -21,6 +21,11 @@ public class HelloController {
         return "hello";
     }
 
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
+    }
+
     @RequestMapping("/goodbye")
     @ResponseBody
     public String goodbye(){
