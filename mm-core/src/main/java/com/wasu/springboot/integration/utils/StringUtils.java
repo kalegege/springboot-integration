@@ -1,6 +1,6 @@
 package com.wasu.springboot.integration.utils;
 
-public class StringUtils extends org.apache.commons.lang.StringUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     public static final String CHARSET_ENCODING="UTF-8";
 

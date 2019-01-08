@@ -8,7 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HelloController {
@@ -24,6 +25,12 @@ public class HelloController {
     @RequestMapping("/index")
     public String index(){
         return "index";
+    }
+
+    @RequestMapping("/redirect")
+    public void redirect(HttpServletResponse response) throws Exception{
+        System.out.println("tttt");
+        response.sendRedirect("https://www.baidu.com");
     }
 
     @RequestMapping("/goodbye")

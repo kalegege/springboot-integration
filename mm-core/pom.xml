@@ -25,20 +25,16 @@
 		<!--springcloud-->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-boot-starter-eureka</artifactId>-->
+			<!--<artifactId>spring-cloud-starter-eureka</artifactId>-->
 		<!--</dependency>-->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.cloud</groupId>-->
 			<!--<artifactId>spring-boot-starter-config</artifactId>-->
 		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-boot-starter-ribbon</artifactId>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-redis</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-ribbon</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -46,8 +42,23 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.wasu</groupId>
 			<artifactId>mm-entity</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
 
 		<dependency>
