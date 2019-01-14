@@ -24,6 +24,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.wasu</groupId>
+			<artifactId>mm-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.wasu</groupId>
 			<artifactId>mm-entity</artifactId>
 		</dependency>
 
@@ -37,6 +42,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

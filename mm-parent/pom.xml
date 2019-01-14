@@ -12,12 +12,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.1.RELEASE</version>
+		<version>1.5.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
 	<properties>
 		<java.version>1.8</java.version>
+		<spring-cloud-contract.version>1.1.2.RELEASE</spring-cloud-contract.version>
 	</properties>
 
 	<!-- 版本说明：这里统一管理依赖的版本号 -->
@@ -68,7 +69,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-contract-dependencies</artifactId>
-				<version>${version}</version>
+				<version>${spring-cloud-contract.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
