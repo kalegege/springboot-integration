@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.locks.Lock;
 
 @Controller
 public class HelloController {
@@ -41,6 +42,7 @@ public class HelloController {
         result.setName(StringUtils.omit("徐健",1));
         result.setAge(100);
         result.setPasswd("123456");
+
         LOGGER.info("---leave goodbye !");
         return result.toString();
     }

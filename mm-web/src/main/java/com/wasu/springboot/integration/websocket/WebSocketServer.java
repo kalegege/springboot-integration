@@ -1,6 +1,9 @@
 package com.wasu.springboot.integration.websocket;
 
 import com.wasu.springboot.integration.controller.HelloController;
+import com.wasu.springboot.integration.entity.system.Message;
+import com.wasu.springboot.integration.utils.JSONUtils;
+import com.wasu.springboot.integration.utils.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,6 +91,10 @@ public class WebSocketServer {
         this.session.getBasicRemote().sendText(message);
     }
 
+    public void sendMessage(Message message) throws IOException {
+        this.session.getBasicRemote().sendText(JSONUtils.toJsonString(message));
+    }
+
     /**
      * 群发自定义消息
      * */
@@ -96,9 +103,31 @@ public class WebSocketServer {
         for (WebSocketServer item : webSocketSet) {
             try {
                 //这里可以设定只推送给这个sid的，为null则全部推送
-                if(sid==null) {
-                    item.sendMessage(message);
+                if("system".equals(sid)) {
+                        item.sendMessage(message);
                 }else if(item.sid.equals(sid)){
+                    item.sendMessage(message);
+                }
+            } catch (IOException e) {
+                continue;
+            }
+        }
+    }
+
+
+    /**
+     * 重写发送方法
+     * @param message
+     * @throws IOException
+     */
+    public static void sendInfo(Message message) throws IOException {
+        LOGGER.info("推送消息到窗口"+message.getTo()+"，推送内容:"+message);
+        for (WebSocketServer item : webSocketSet) {
+            try {
+                //这里可以设定只推送给这个sid的，为null则全部推送
+                if("system".equals(message.getTo())) {
+                    item.sendMessage(message);
+                }else if(item.sid.equals(message.getTo())){
                     item.sendMessage(message);
                 }
             } catch (IOException e) {
