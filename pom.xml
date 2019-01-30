@@ -16,5 +16,6 @@
 		<module>mm-entity</module>
 		<module>mm-core</module>
 		<module>mm-parent</module>
+		<module>mm-job</module>
 	</modules>
 </project>
