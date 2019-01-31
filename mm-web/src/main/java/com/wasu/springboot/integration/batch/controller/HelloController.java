@@ -1,4 +1,4 @@
-package com.wasu.springboot.integration.controller;
+package com.wasu.springboot.integration.batch.controller;
 
 import com.wasu.springboot.integration.entity.system.UserInfo;
 import com.wasu.springboot.integration.utils.StringUtils;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.concurrent.locks.Lock;
 
 @Controller
 public class HelloController {

@@ -1,4 +1,4 @@
-package com.wasu.springboot.integration.controller;
+package com.wasu.springboot.integration.batch.controller;
 
 import com.wasu.springboot.integration.utils.JSONUtils;
 import com.wasu.springboot.integration.utils.JsonResultUtils;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/service")
-public class HelloController {
+@RequestMapping("/batch/batchTask")
+public class BatchTaskController {
 
     @RequestMapping("/hello")
     public String say(){
