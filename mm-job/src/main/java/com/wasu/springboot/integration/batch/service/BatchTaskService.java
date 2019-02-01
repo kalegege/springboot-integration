@@ -20,4 +20,10 @@ public interface BatchTaskService {
     PageBean<BatchTaskEntity> listPageBatchTask(PageParam pageParam, String taskName, Date executeDate, int dependonid);
 
 
+    /**
+     * 查询跑批task对象
+     * @param entity
+     * @return
+     */
+    BatchTaskEntity getBatchTask(BatchTaskEntity entity);
 }

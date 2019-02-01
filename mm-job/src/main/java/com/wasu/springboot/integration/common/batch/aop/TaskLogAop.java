@@ -1,7 +1,11 @@
 package com.wasu.springboot.integration.common.batch.aop;
 
+import com.wasu.springboot.integration.batch.service.BatchTaskService;
 import com.wasu.springboot.integration.common.config.DynamicConfig;
 import com.wasu.springboot.integration.constants.ApplicationConstants;
+import com.wasu.springboot.integration.entity.batch.BatchTaskEntity;
+import com.wasu.springboot.integration.utils.AnnotationUtils;
+import com.wasu.springboot.integration.utils.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,6 +22,9 @@ public class TaskLogAop {
     @Autowired
     private DynamicConfig dynamicConfig;
 
+    @Autowired
+    private BatchTaskService batchTaskService;
+
     @Pointcut("@annotation(com.wasu.springboot.integration.common.batch.aop.TaskLogAnnotation)")
     private void init(){
 
@@ -30,5 +37,18 @@ public class TaskLogAop {
             return;
         }
 
+        String methodName=joinPoint.getSignature().getName();
+        String taskName = AnnotationUtils.getMethodAnnotationValue(joinPoint.getTarget().getClass(),methodName,TaskLogAnnotation.class,"taskName").toString();
+
+        BatchTaskEntity taskEntity=new BatchTaskEntity();
+        taskEntity.setTaskName(taskName);
+        taskEntity.setUseStatus(1);
+        taskEntity=batchTaskService.getBatchTask(taskEntity);
+
+        if(null != taskEntity){
+            //todo 完成日志打印操作
+        }else{
+
+        }
     }
 }
