@@ -1,6 +1,6 @@
 package com.wasu.springboot.integration.utils;
 
-public class PatternUtils {
+public class RegularUtils {
 
     /**
      * 18位身份证号
