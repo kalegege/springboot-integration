@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 public class MapUtils extends org.apache.commons.collections.MapUtils {
 
-    public static Map<String,Object> populate(Object data){
+    public static Map<String,Object> populateMap(Object data){
         return populateMap(new HashMap<>(), data);
     }
 
