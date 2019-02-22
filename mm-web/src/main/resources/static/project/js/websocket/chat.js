@@ -1,4 +1,24 @@
 $(function () {
+
+    $('#send').on('click', function () {
+        var cid = $('#cid').val();
+        var message = $('#sendText').val();
+        //提交json数据
+        $.ajax({
+            type: "POST",
+            url: "/checkcenter/socket/pushNew/system?message=" + message + "&from=" + cid,
+            contentType: "application/json;charset=utf-8",
+            // data: {"message": "hello", "from": 21},
+            dataType: "json",
+            success: function (message) {
+                console.log("提交成功");
+            },
+            error: function (message) {
+                console.log("提交失败");
+            }
+        });
+    });
+
     var socket;
     var cid = $('#cid').val();
     if (typeof(WebSocket) == "undefined") {
@@ -15,10 +35,10 @@ $(function () {
         };
         //获得消息事件
         socket.onmessage = function (msg) {
-            var message=JSON.parse(msg.data);
+            var message = JSON.parse(msg.data);
             console.log(message);
             var chatView = document.getElementById("chatView");
-            chatView.value = chatView.value + message.from + "-->" + message.to + ":" + message.message + "\n";
+            chatView.value = chatView.value + message.from + ":" + message.message + "\n";
             //发现消息进入    开始处理前端触发逻辑
         };
         //关闭事件

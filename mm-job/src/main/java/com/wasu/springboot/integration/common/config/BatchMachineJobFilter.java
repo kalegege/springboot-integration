@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 public class BatchMachineJobFilter implements JobFilter {
     @Override
     public boolean preHandler() {
-        String ips= StringUtils.substringBetween(IpUtils.getIpStr(),"[","]");
-        ips=StringUtils.deleteWhitespace(ips);
-        String[] arrIps=StringUtils.split(ips,".");
-        for(String ip:arrIps){
-            boolean allow=allow(ip);
-            if(allow){
+        String ips = StringUtils.substringBetween(IpUtils.getIpStr(), "[", "]");
+        ips = StringUtils.deleteWhitespace(ips);
+        String[] arrIps = StringUtils.split(ips, ".");
+        for (String ip : arrIps) {
+            boolean allow = allow(ip);
+            if (allow) {
                 return true;
             }
         }
@@ -22,7 +22,7 @@ public class BatchMachineJobFilter implements JobFilter {
     }
 
     private boolean allow(String ip) {
-        if(StringUtils.isBlank(ip)) return false;
+        if (StringUtils.isBlank(ip)) return false;
 
         return true;
     }

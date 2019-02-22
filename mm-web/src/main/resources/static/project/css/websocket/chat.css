@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+}
+
+#chatView
+{
+    height: 900px;
+    width: 2500px;
+}
+
+#sendText{
+    width: 500px;
+}

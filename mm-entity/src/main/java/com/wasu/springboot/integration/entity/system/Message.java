@@ -18,6 +18,11 @@ public class Message {
         this.message = message;
     }
 
+    public Message(String message) {
+        this.message = message;
+        this.from="system";
+    }
+
     public String getFrom() {
         return from;
     }
