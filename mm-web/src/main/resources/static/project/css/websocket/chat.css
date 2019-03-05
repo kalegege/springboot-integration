@@ -6,6 +6,7 @@ body {
 {
     height: 900px;
     width: 2500px;
+    border: solid;
 }
 
 #sendText{

@@ -37,8 +37,9 @@ $(function () {
         socket.onmessage = function (msg) {
             var message = JSON.parse(msg.data);
             console.log(message);
-            var chatView = document.getElementById("chatView");
-            chatView.value = chatView.value + message.from + ":" + message.message + "\n";
+            var receiveMessage = "<div class=" + '"' + "chip" + '"' + ">" + message.message +
+                "<i class=" + '"' + "close material - icons" + '"' + ">close</i></div>";
+            $('#chatView').append(receiveMessage);
             //发现消息进入    开始处理前端触发逻辑
         };
         //关闭事件
