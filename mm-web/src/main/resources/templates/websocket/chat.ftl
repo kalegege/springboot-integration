@@ -31,25 +31,18 @@
 </header>
 <main>
     <div class="row">
-    <h1>这里是${cid}号聊天室：</h1>
-    <input type="hidden" id="cid" value="${cid}"/>
-    <div id="chatView"></div>
-</div>
+        <h1>这里是${cid}号聊天室：</h1>
+        <input type="hidden" id="cid" value="${cid}"/>
+    </div>
+    <div class="row" id="chatView"></div>
     <div class="row">
         <form class="col s12">
             <div class="row">
-            <#--<div class="input-field col s6">-->
-            <#--<input placeholder="请输入信息" id="sendText" type="text">-->
-            <#--<label for="first_name">发送内容</label>-->
-            <#--</div>-->
                 <div class="input-field inline">
                     <input id="sendText" type="message">
                     <label for="message" data-error="wrong" data-success="right">发送内容</label>
                     <a class="waves-effect waves-light btn" id="send">发送</a>
                 </div>
-            <#--<div class="input-field col s6">-->
-            <#--<a class="waves-effect waves-light btn" id="send">发送</a>-->
-            <#--</div>-->
             </div>
         </form>
     </div>
@@ -86,7 +79,8 @@
                 <iframe src="http://ghbtns.com/github-btn.html?user=dogfalo&repo=materialize&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
                  -->
                 <a href="http://wpa.qq.com/msgrd?V=3&amp;uin=473166512&amp;Site=完美起航&amp;Menu=yes&amp;from=okgoes"
-                   target="_blank" title="QQ"><img src="${request.contextPath}/static/project/images/site_qq.jpg" alt="QQ"
+                   target="_blank" title="QQ"><img src="${request.contextPath}/static/project/images/site_qq.jpg"
+                                                   alt="QQ"
                                                    style="vertical-align: middle;"></a>
                 <br>
                 <a href="mailto:473166512@qq.com" class="twitter-follow-button" data-show-count="true" data-size="large"
