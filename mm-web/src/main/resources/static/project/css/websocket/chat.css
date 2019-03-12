@@ -4,7 +4,7 @@
 
 /*#chatView*/
 /*{*/
-    /*height: 2000px;*/
+    /*height: 500px;*/
     /*width: 2500px;*/
     /*border: solid;*/
 /*}*/
@@ -12,3 +12,6 @@
 /*#sendText{*/
     /*width: 500px;*/
 /*}*/
+.card-panel{
+    height:400px;
+}

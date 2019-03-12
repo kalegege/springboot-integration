@@ -27,7 +27,7 @@
                     <i class="material-icons">close</i>
                 </div>
             </form>
-            <ul class="navbar-list right col s6">
+            <ul class="navbar-list right col s3 offset-s3">
                 <li><a href="#!"><i class="material-icons">search</i></a></li>
                 <li><a href="#!"><i class="material-icons">view_module</i></a></li>
                 <li><a href="#!"><i class="material-icons">refresh</i></a></li>
@@ -40,9 +40,9 @@
     <li>
         <div class="user-view">
             <div class="background">
-                <img src="images/office.jpg">
+
             </div>
-            <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+            <a href="#user"><span class="white-text name">12312</span></a>
             <a href="#name"><span class="white-text name">John Doe</span></a>
             <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div>
@@ -57,17 +57,17 @@
 </ul>
 <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 <div class="row">
-    <div class="col s12 animate fadeRight">
+    <div class="col s16 animate fadeRight">
         <div class="card">
             <div class="card-content">
-                <h4 class="card-title mb-0">这里是${cid}号聊天室：</h4>
+                <h4 class="card-title mb-0">用户ID：${cid}</h4>
                 <input type="hidden" id="cid" value="${cid}"/>
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col s12">
+    <div class="col s6 offset-s3">
         <div class="card-panel teal">
             <span class="white-text" id="chatView"></span>
         </div>
@@ -77,7 +77,7 @@
     <form class="col s12">
         <div class="row">
         <#--<input id="sendText" type="message">-->
-            <div class="input-field col s8">
+            <div class="input-field col s5 offset-s3">
                 <textarea id="sendText" class="materialize-textarea"></textarea>
                 <label for="textarea1">Textarea</label>
             </div>

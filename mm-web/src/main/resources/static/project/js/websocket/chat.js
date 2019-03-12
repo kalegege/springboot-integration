@@ -3,6 +3,7 @@ $(function () {
     $('#send').on('click', function () {
         var cid = $('#cid').val();
         var message = $('#sendText').val();
+        $('#sendText').val("");
         //提交json数据
         $.ajax({
             type: "POST",
@@ -36,9 +37,11 @@ $(function () {
         //获得消息事件
         socket.onmessage = function (msg) {
             var message = JSON.parse(msg.data);
-            console.log(message);
+            if(message.from != $('#cid').val()){
+                M.toast({html: '您有一条消息，请注意查收！'});
+            }
             var receiveMessage = "<div class=" + '"' + "chip" + '"' + ">" + message.message +
-                "<i class=" + '"' + "close material - icons" + '"' + ">close</i></div>";
+                "<i class=" + '"' + "close material - icons" + '"' + ">x</i></div>";
             $('#chatView').append(receiveMessage);
             //发现消息进入    开始处理前端触发逻辑
         };
