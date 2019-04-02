@@ -21,6 +21,11 @@ public class HelloController {
         modelMap.addAttribute("msg","this is my first freemarker");
         return "hello";
     }
+    @RequestMapping("/panel")
+    public String panel(ModelMap modelMap){
+        modelMap.addAttribute("msg","this is my first freemarker");
+        return "websocket/panel";
+    }
 
     @RequestMapping("/index")
     public String index(){
