@@ -52,6 +52,11 @@
 			<groupId>com.wasu</groupId>
 			<artifactId>mm-entity</artifactId>
 		</dependency>
+		<!--可以引入日志 @Slf4j注解-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
