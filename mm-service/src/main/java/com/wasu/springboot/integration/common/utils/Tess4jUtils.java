@@ -4,9 +4,9 @@ import com.wasu.springboot.integration.constants.CommonConstant;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
-import net.sourceforge.tess4j.util.LoadLibs;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * tesseract for java， ocr（Optical Character Recognition，光学字符识别）
@@ -27,9 +27,20 @@ public class Tess4jUtils {
         File imageFile = new File(path);
         //In case you don't have your own tessdata, let it also be extracted for you
         //这样就能使用classpath目录下的训练库了
-        File tessDataFolder = LoadLibs.extractTessResources("tessdata");
+//        File tessDataFolder = LoadLibs.extractTessResources("tessdata");
         //Set the tessdata path
-        instance.setDatapath(tessDataFolder.getAbsolutePath());
+//        instance.setDatapath(tessDataFolder.getAbsolutePath());
+        /**
+         *  获取项目根路径，例如： D:\IDEAWorkSpace\tess4J
+         */
+        File directory = new File("D:\\tools\\Tess4J");
+        String courseFile = null;
+        try {
+            courseFile = directory.getCanonicalPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        instance.setDatapath(courseFile + "\\tessdata");
         //英文库识别数字比较准确
         instance.setLanguage(CommonConstant.ENG);
         return getOCRText(instance, imageFile);
@@ -68,11 +79,11 @@ public class Tess4jUtils {
     }
 
     public static void main(String[] args) {
-        /*String path = "src/main/resources/image/text.png";
-        System.out.println(readChar(path));*/
+        String path = "D:\\workspace\\mm\\mm-service\\src\\main\\resources\\static\\project\\images\\image1.png";
+        System.out.println(readChar(path));
 
-        String ch = "src/main/resources/image/ch.png";
-        System.out.println(readChar(ch, "src/main/resources", CommonConstant.CHI_SIM));
+//        String ch = "src/main/resources/static/project/images/image1.png";
+//        System.out.println(readChar(ch, "src/main/resources", CommonConstant.CHI_SIM));
     }
 
 }
