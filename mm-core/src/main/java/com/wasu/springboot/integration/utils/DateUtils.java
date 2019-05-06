@@ -9,9 +9,12 @@ public class DateUtils {
 
     private static final String[] DAYNAMES = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
     private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final List<String> DATE_FORMATE_LIST = new ArrayList<>(Arrays.asList(
+            "yyyy-MM-dd", "yyyy/MM/dd", "yyyy/MM/dd", "yyyyMMdd"
+    ));
     private static final String DATE_FORMATE_1 = "yyyy-MM-dd";
     private static final String DATE_FORMATE_2 = "yyyy/MM/dd";
-    private static final String DATE_FORMATE_3 = "yyyy年MM月dd";
+    private static final String DATE_FORMATE_3 = "yyyy/MM/dd";
     private static final String DATE_FORMATE_4 = "yyyyMMdd";
 
     public static Date getNow() {
@@ -49,6 +52,10 @@ public class DateUtils {
         return checkMonth;
     }
 
+    /**
+     * @param dateTime
+     * @return
+     */
     public static Boolean isDate(String dateTime) {
         try {
             parse(dateTime, DATE_FORMATE_1);
@@ -68,6 +75,23 @@ public class DateUtils {
             }
         }
         return Boolean.valueOf(true);
+    }
+
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public static Date getDate(String date) {
+        for (int i = 0; i < DATE_FORMATE_LIST.size(); i++) {
+            Date d = parse(date, DATE_FORMATE_LIST.get(i));
+            if(null == d){
+                continue;
+            }else{
+                return d;
+            }
+        }
+        return null;
     }
 
     public static Date parseDateTime(String dateTime) {
@@ -146,4 +170,5 @@ public class DateUtils {
         int internal = (toYear - fromYear) * 12 + (toMonth - fromMonth);
         return internal > 0 ? internal : 0;
     }
+
 }
