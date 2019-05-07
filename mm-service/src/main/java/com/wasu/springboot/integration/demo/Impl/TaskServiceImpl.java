@@ -55,6 +55,56 @@ public class TaskServiceImpl implements TaskService {
         System.out.print("剩下的是:"+integerList.get(0));
     }
 
+    /**
+     * 题目：输入数组，最大的与第一个元素交换，最小的与最后一个元素交换，输出数组。
+     */
+    @Override
+    public void calculate_1() {
+        Random r=new Random();
+        int[] ints=new int[r.nextInt(50)];
+        for(int i=0 ;i < ints.length;i++){
+            ints[i]=r.nextInt(50);
+        }
+        for (int i = 0; i < ints.length -1;i++)
+        {
+            System.out.print(ints[i] + ",");
+        }
+        System.out.println(ints[ints.length -1]);
+        int big=ints[0];
+        int small=ints[0];
+        int bigIndex=0;
+        int smallIndex=0;
+        for(int i=1;i<ints.length;i++){
+            if(ints[i] > big){
+                big=ints[i];
+                bigIndex=i;
+            }
+            if(ints[i] < small){
+                small=ints[i];
+                smallIndex=i;
+            }
+        }
+
+        if(bigIndex != 0){
+            //交换0 和bigIndex
+            int tmp = ints[0];
+            ints[0] = ints[bigIndex];
+            ints[bigIndex]=tmp;
+        }
+        if(smallIndex != ints.length - 1){
+            //交换 smallIndex 和 ints.length - 1
+            int tmp = ints[smallIndex];
+            ints[smallIndex] = ints[ints.length - 1];
+            ints[ints.length - 1]=tmp;
+        }
+        for (int i = 0; i < ints.length - 1;i++)
+        {
+            System.out.print(ints[i] + ",");
+        }
+        System.out.println(ints[ints.length -1]);
+
+    }
+
     private static void calculate1() {
         System.out.print("请输入一个整数：");
         Scanner scan = new Scanner(System.in);
@@ -93,7 +143,7 @@ public class TaskServiceImpl implements TaskService {
     public static void main(String[] args) {
         TaskService t = new TaskServiceImpl();
 //        t.formateDept();
-        t.calculate();
-        calculate1();
+        t.calculate_1();
+//        calculate1();
     }
 }
