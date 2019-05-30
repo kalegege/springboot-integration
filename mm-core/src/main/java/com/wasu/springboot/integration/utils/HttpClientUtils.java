@@ -263,7 +263,7 @@ public class HttpClientUtils {
         return null;
     }
 
-    private static String postForJson(String uri, Map<String, Object> params) {
+    public static String postForJson(String uri, Map<String, Object> params) {
         return postForJson(uri, params, "UTF-8");
     }
 

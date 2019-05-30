@@ -12,7 +12,7 @@
 	<modules>
 		<module>mm-web</module>
 		<module>mm-service</module>
-		<module>mm-repo</module>
+		<module>mm-gateway</module>
 		<module>mm-entity</module>
 		<module>mm-core</module>
 		<module>mm-parent</module>

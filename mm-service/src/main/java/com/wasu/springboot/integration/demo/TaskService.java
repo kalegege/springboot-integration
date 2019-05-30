@@ -12,4 +12,14 @@ public interface TaskService {
      * 题目：输入数组，最大的与第一个元素交换，最小的与最后一个元素交换，输出数组。
      */
     void calculate_1();
+
+    /**
+     * 题目：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？
+     */
+    void calculate_2();
+
+    /**
+     * 接收邮件
+     */
+    void receiveMail();
 }

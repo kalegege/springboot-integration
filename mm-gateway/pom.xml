@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wasu</groupId>
-	<artifactId>mm-repo</artifactId>
+	<artifactId>mm-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mm-repo</name>
+	<name>mm-gateway</name>
 	<packaging>jar</packaging>
 
 	<parent>

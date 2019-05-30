@@ -16,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 public class WebSocketServer {
 
-    private static final Logger LOGGER= LoggerFactory.getLogger(WebSocketServer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketServer.class);
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
@@ -26,17 +26,18 @@ public class WebSocketServer {
     private Session session;
 
     //接收sid
-    private String sid="";
+    private String sid = "";
 
     /**
-     * 连接建立成功调用的方法*/
+     * 连接建立成功调用的方法
+     */
     @OnOpen
-    public void onOpen(Session session,@PathParam("sid") String sid) {
+    public void onOpen(Session session, @PathParam("sid") String sid) {
         this.session = session;
         webSocketSet.add(this);     //加入set中
         addOnlineCount();           //在线数加1
-        LOGGER.info("有新窗口开始监听:"+sid+",当前在线人数为" + getOnlineCount());
-        this.sid=sid;
+        LOGGER.info("有新窗口开始监听:" + sid + ",当前在线人数为" + getOnlineCount());
+        this.sid = sid;
         try {
             sendMessage("连接成功");
         } catch (IOException e) {
@@ -57,10 +58,11 @@ public class WebSocketServer {
     /**
      * 收到客户端消息后调用的方法
      *
-     * @param message 客户端发送过来的消息*/
+     * @param message 客户端发送过来的消息
+     */
     @OnMessage
     public void onMessage(String message, Session session) {
-        LOGGER.info("收到来自窗口"+sid+"的信息:"+message);
+        LOGGER.info("收到来自窗口" + sid + "的信息:" + message);
         //群发消息
         for (WebSocketServer item : webSocketSet) {
             try {
@@ -72,7 +74,6 @@ public class WebSocketServer {
     }
 
     /**
-     *
      * @param session
      * @param error
      */
@@ -81,6 +82,7 @@ public class WebSocketServer {
         LOGGER.error("发生错误");
 //        error.printStackTrace();
     }
+
     /**
      * 实现服务器主动推送
      */
@@ -94,15 +96,15 @@ public class WebSocketServer {
 
     /**
      * 群发自定义消息
-     * */
-    public static void sendInfo(String message,@PathParam("sid") String sid) throws IOException {
-        LOGGER.info("推送消息到窗口"+sid+"，推送内容:"+message);
+     */
+    public static void sendInfo(String message, @PathParam("sid") String sid) throws IOException {
+        LOGGER.info("推送消息到窗口" + sid + "，推送内容:" + message);
         for (WebSocketServer item : webSocketSet) {
             try {
                 //这里可以设定只推送给这个sid的，为null则全部推送
-                if("system".equals(sid)) {
-                        item.sendMessage(message);
-                }else if(item.sid.equals(sid)){
+                if ("system".equals(sid)) {
+                    item.sendMessage(message);
+                } else if (item.sid.equals(sid)) {
                     item.sendMessage(message);
                 }
             } catch (IOException e) {
@@ -114,17 +116,18 @@ public class WebSocketServer {
 
     /**
      * 重写发送方法
+     *
      * @param message
      * @throws IOException
      */
     public static void sendInfo(Message message) throws IOException {
-        LOGGER.info("推送消息到窗口"+message.getTo()+"，推送内容:"+message);
+        LOGGER.info("推送消息到窗口" + message.getTo() + "，推送内容:" + message);
         for (WebSocketServer item : webSocketSet) {
             try {
                 //这里可以设定只推送给这个sid的，为null则全部推送
-                if("system".equals(message.getTo())) {
+                if ("system".equals(message.getTo())) {
                     item.sendMessage(message);
-                }else if(item.sid.equals(message.getTo())){
+                } else if (item.sid.equals(message.getTo())) {
                     item.sendMessage(message);
                 }
             } catch (IOException e) {

@@ -21,6 +21,10 @@ public class DateUtils {
         return new Date();
     }
 
+    public static String formate(Date date){
+        return formatDateTime(date,"yyy-MM-dd HH:mm:ss");
+    }
+
     public static Date parseDate(String dateTime) {
         return parse(dateTime, DATE_FORMATE_1);
     }

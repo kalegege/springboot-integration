@@ -5,12 +5,16 @@ import com.hankcs.hanlp.tokenizer.NLPTokenizer;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import com.wasu.springboot.integration.demo.TaskService;
 import com.wasu.springboot.integration.entity.Task.TaskDO;
-import javafx.concurrent.Task;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class TaskServiceImpl implements TaskService {
 
@@ -105,6 +109,31 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     * 题目：有1、2、3、4个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？
+     */
+    @Override
+    public void calculate_2() {
+        int count=0;
+        for(int i=1;i<5;i++){
+            for(int j =1;j<5;j++){
+                for(int k=1;k<5;k++){
+                    if(i!=j && j!=k && i!=k){
+                        count++;
+                        System.out.println("数字就是:"+(i*100+j*10+k));
+                    }
+                }
+            }
+        }
+        System.out.println("一共有:"+count+"个");
+
+    }
+
+    @Override
+    public void receiveMail() {
+
+    }
+
     private static void calculate1() {
         System.out.print("请输入一个整数：");
         Scanner scan = new Scanner(System.in);
@@ -140,10 +169,24 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    public static void main(String[] args) {
-        TaskService t = new TaskServiceImpl();
-//        t.formateDept();
-        t.calculate_1();
-//        calculate1();
+    public static void main(String[] args) throws Exception{
+        ExecutorService exes= Executors.newFixedThreadPool(2);
+        exes.execute(new Runnable() {
+            @Override
+            public void run() {
+                while(true){}
+            }
+        });
+       exes.execute(new Runnable() {
+           @Override
+           public void run() {
+               System.out.println("do b:");
+           }
+       });
+        int threadCount = ((ThreadPoolExecutor)exes).getActiveCount();
+       System.out.println("active:"+threadCount);
+       Thread.sleep(500);
+        System.out.println("active:"+threadCount);
+
     }
 }
