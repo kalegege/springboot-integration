@@ -5,12 +5,9 @@ import com.hankcs.hanlp.tokenizer.NLPTokenizer;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import com.wasu.springboot.integration.demo.TaskService;
 import com.wasu.springboot.integration.entity.Task.TaskDO;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import com.alibaba.fastjson.JSON;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -187,6 +184,13 @@ public class TaskServiceImpl implements TaskService {
        System.out.println("active:"+threadCount);
        Thread.sleep(500);
         System.out.println("active:"+threadCount);
+
+
+        Map<String,String> mapType = JSON.parseObject("{\"name\":\"zhangsan\",\"age\":4,\"address\":\"wangwu\",\"tel\":\"maliu\"}",Map.class);
+        System.out.println("这个是用JSON类,指定解析类型，来解析JSON字符串!!!");
+        for (Object obj : mapType.keySet()){
+            System.out.println("key为："+obj+"值为："+ mapType.get(obj).toString());
+        }
 
     }
 }

@@ -17,5 +17,6 @@
 		<module>mm-core</module>
 		<module>mm-parent</module>
 		<module>mm-job</module>
+		<module>mm-config</module>
 	</modules>
 </project>
