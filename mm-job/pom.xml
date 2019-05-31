@@ -86,6 +86,19 @@
 	</profiles>
 
 	<build>
+		<finalName>mm-gateway</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>local/*</exclude>
+					<exclude>prod/*</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/${profiles.active}</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -93,5 +106,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
