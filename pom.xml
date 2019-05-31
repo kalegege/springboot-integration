@@ -18,5 +18,6 @@
 		<module>mm-parent</module>
 		<module>mm-job</module>
 		<module>mm-config</module>
+        <module>mm-eureka</module>
 	</modules>
 </project>
