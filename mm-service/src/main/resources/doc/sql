@@ -1,0 +1,48 @@
+--建表脚本
+create table sys_file_info(
+    id int8 NOT NULL AUTO_INCREMENT,
+    file_type int2 not null,
+    file_name varvhar(128),
+    file_path varvhar(256) NOT NULL,
+    file_group varvhar(128) NOT NULL,
+    file_size int8,
+    ctime timestamp(6) default now() not null,
+    mtime timestamp(6) default now() not null,
+    rtiem timestamp(6),
+    creater int8,
+    updater int8,
+    isvalid int2 default 1 not null,
+    orgid int8,
+    PRIMARY KEY ( id )
+);
+
+create table wb_report(
+    id int8 NOT NULL AUTO_INCREMENT,
+    report_type varvhar(32),
+    report_type_name varvhar(32),
+    report_code varvhar(32),
+    report_name varvhar(32),
+    wb_report_grade_id int8,
+    report_title varvhar(512),
+    report_desc text,
+    report_keyword varvhar(400),
+    rela_report_id int8,
+    import_user int8,
+    mechanism varvhar(64),
+    author varvhar(32),
+    industry varvhar(32),
+    industry_name varvhar(32),
+    orgid int8,
+    report_source int2,
+    file_path varvhar(1024),
+    report_url varvhar(1024),
+    original_industry varvhar(64),
+    ctime timestamp(6) default now() not null,
+    mtime timestamp(6) default now() not null,
+    rtiem timestamp(6),
+    creater int8,
+    updater int8,
+    isvalid int2 default 1 not null,
+    orgid int8,
+    PRIMARY KEY ( id )
+);

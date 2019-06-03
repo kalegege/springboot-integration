@@ -40,6 +40,9 @@ public class AutoImportReportTask implements SimpleJob {
         param.put("appkey",dynamicConfig.getGatewayAppkey());
         param.put("appsecret",dynamicConfig.getGatewayAppsecret());
         Date now= DateUtils.getNow();
+        //获取系统的ctime
+        param.put("isContainCtime",CommonConstant.NUMBER_1);
+        param.put("startTime",DateUtils.formate(now));
         param.put("endTime",DateUtils.formate(now));
 
         queryOutsideFromOutside(param);

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.springboot.integration.dao.impl.OutsideReportDaoImpl">
+    <insert id="insert" parameterType="com.wasu.springboot.integration.entity.report.OutSideReportEntity">
+        INSERT INTO wb_report(
+        ctime,mtime,creater,updater,isvalid,report_type,report_type_name,report_code,report_name,
+        wb_report_grade_id,report_title,report_desc,report_keyword,rela_report_id,import_user,mechanism,
+        author,industry,industry_name,report_source,file_path,report_url,original_industry
+        )VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.ctime},now(),#{item.creater},#{item.creater},1,#{item.report_type},
+            #{item.report_type_name},#{item.report_code},#{item.report_name},
+            #{item.wb_report_grade_id},#{item.report_title},#{item.report_desc},
+            #{item.report_keyword},#{item.rela_report_id},#{item.import_user},#{item.mechanism},
+            #{item.author},#{item.industry},#{item.industry_name},
+            #{item.report_source},#{item.file_path},#{item.report_url},#{item.original_industry}
+            )
+        </foreach>
+    </insert>
+</mapper>
