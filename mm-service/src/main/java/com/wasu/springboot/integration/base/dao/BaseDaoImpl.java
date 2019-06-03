@@ -115,7 +115,7 @@ public class BaseDaoImpl implements BaseDao {
         if(list == null || list.size() <= 0){
             return 0;
         }
-        int result= writeSessionTemplate.insert(getStatement(SQL_INSERT),list);
+        int result= writeSessionTemplate.insert(getStatement(SQL_BATCH_UPDATE),list);
         return result;
     }
 
@@ -383,7 +383,11 @@ public class BaseDaoImpl implements BaseDao {
 
     @Override
     public <T> List<T> listBy(Object paramObject) {
-        return null;
+        return readSessionTemplate.selectList(getStatement(SQL_LIST_BY),paramObject);
+    }
+
+    protected  <T> List<T> listBy(String sqlId,Object paramObject) {
+        return readSessionTemplate.selectList(getStatement(sqlId),paramObject);
     }
 
     /**
