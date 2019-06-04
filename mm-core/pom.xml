@@ -33,6 +33,13 @@
 			<artifactId>spring-cloud-starter-ribbon</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.csource/fastdfs-client-java -->
+		<dependency>
+			<groupId>org.csource</groupId>
+			<artifactId>fastdfs-client-java</artifactId>
+			<version>1.27-RELEASE</version>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -54,6 +61,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
+
+		<!--<dependency>-->
+			<!--<groupId>com.alibaba</groupId>-->
+			<!--<artifactId>fastjson</artifactId>-->
+			<!--<version>1.2.35</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>redis.clients</groupId>

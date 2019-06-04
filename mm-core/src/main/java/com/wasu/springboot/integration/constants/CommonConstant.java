@@ -2,6 +2,11 @@ package com.wasu.springboot.integration.constants;
 
 public class CommonConstant {
 
+
+    public final static String SUCCESS="success";
+
+    public final static String FAILURE="failure";
+
     public final static int ERROR_FLAG=-1;
 
     public final static String ENG="eng";
