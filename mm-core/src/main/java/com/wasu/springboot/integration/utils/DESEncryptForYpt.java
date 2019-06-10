@@ -191,13 +191,13 @@ public class DESEncryptForYpt
 			//测试密匙
 			DESEncryptForYpt desForYpt = new DESEncryptForYpt();
 			String Username = "kangmin";
-			String ShowName = "康小敏";
+			String ShowName = "康大敏";
 			String Role = "测试小组组长";
-			String Department = "测大金融终端测试部";
+			String Department = "测大金融终端开发部";
 
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			Date afterDate = new Date(now .getTime() + 300000);
+			Date afterDate = new Date(now .getTime() + 3600000000000L);
 
 			String jumpurl = "/main.html#/officehall";
 			String codeString= "浙政钉;" + Username + ";" + (ShowName == null ? "" : ShowName.replace(";", "；"))
