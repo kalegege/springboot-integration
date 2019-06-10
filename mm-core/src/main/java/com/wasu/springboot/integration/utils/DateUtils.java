@@ -175,4 +175,55 @@ public class DateUtils {
         return internal > 0 ? internal : 0;
     }
 
+    public static int getSubDay(Date first, Date second) {
+        Calendar firstCalendar=Calendar.getInstance();
+        firstCalendar.setTime(first);
+
+        Calendar secondCalendar=Calendar.getInstance();
+        secondCalendar.setTime(second);
+
+        StringBuilder sbFirst=new StringBuilder();
+        sbFirst.append(firstCalendar.get(Calendar.YEAR));
+        sbFirst.append("-");
+        sbFirst.append(firstCalendar.get(Calendar.MONTH) + 1);
+        sbFirst.append("-");
+        sbFirst.append(firstCalendar.get(Calendar.DAY_OF_MONTH));
+
+        StringBuilder sbSecond=new StringBuilder();
+        sbSecond.append(secondCalendar.get(Calendar.YEAR));
+        sbSecond.append("-");
+        sbSecond.append(secondCalendar.get(Calendar.MONTH) + 1);
+        sbSecond.append("-");
+        sbSecond.append(secondCalendar.get(Calendar.DAY_OF_MONTH));
+
+        Date firstYmd=parse(sbFirst.toString(),"yyyy-M-dd");
+        Date secondYmd=parse(sbSecond.toString(),"yyyy-MM-dd");
+
+        return getDiffDay(firstYmd,secondYmd);
+    }
+
+    private static Integer getDiffDay(Date start, Date end) {
+        if(start.after(end)){
+            Date temp=start;
+            start=end;
+            end=temp;
+        }
+        Calendar startCalendar=Calendar.getInstance();
+        startCalendar.setTime(start);
+        Calendar endCalendar=Calendar.getInstance();
+        endCalendar.setTime(end);
+        Integer len=Integer.valueOf((endCalendar.get(1)-startCalendar.get(1)) * 12 + endCalendar.get(2)
+                    - startCalendar.get(2));
+        if(endCalendar.get(5) < startCalendar.get(5)){
+            len=Integer.valueOf(len.intValue() - 1);
+        }
+        return len;
+    }
+
+    public static Date addOrSubDay(Date date, int day) {
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(5,day);
+        return calendar.getTime();
+    }
 }

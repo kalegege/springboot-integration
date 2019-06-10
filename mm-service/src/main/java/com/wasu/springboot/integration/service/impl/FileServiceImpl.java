@@ -52,8 +52,9 @@ public class FileServiceImpl implements FileService {
             file.setFileName(mFile.getOriginalFilename());
             file.setFileSize(mFile.getSize());
 
-            String[] fileId=fileUploadService.uploadFile(mFile.getInputStream(),mFile.getOriginalFilename(),
-                    mFile.getSize());
+            String[] fileId=null;
+//                    fileUploadService.uploadFile(mFile.getInputStream(),mFile.getOriginalFilename(),
+//                    mFile.getSize());
             if(null == fileId){
                 return null;
             }
