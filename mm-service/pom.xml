@@ -37,6 +37,16 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.cloud</groupId>-->
+			<!--<artifactId>spring-cloud-commons</artifactId>-->
+		<!--</dependency>-->
+
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.retry</groupId>-->
+			<!--<artifactId>spring-retry</artifactId>-->
+		<!--</dependency>-->
+
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -62,6 +72,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+		</dependency>
+
 	</dependencies>
 	<profiles>
 		<profile>
@@ -82,7 +97,7 @@
 	</profiles>
 
 	<build>
-		<finalName>mm-gateway</finalName>
+		<finalName>mm-service</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

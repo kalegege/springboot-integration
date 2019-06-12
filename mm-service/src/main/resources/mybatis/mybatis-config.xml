@@ -17,8 +17,8 @@
         <!--配置默认的执行器 REUSE 执行器重用 预处理语句 BATCH执行器重用语句和批量更新-->
         <setting name="defaultExecutorType" value="SIMPLE"/>
 
-        <setting name="safeRowboundsEnabled" value="false"/>
-        <setting name="mapUnderscoreToCamelcase" value="fasle"/>
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
         <setting name="localCacheScope" value="SESSION"/>
         <setting name="jdbcTypeForNull" value="OTHER"/>
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hasCode,toString"/>
@@ -28,6 +28,7 @@
     </settings>
 
     <mappers>
-        <mapper resource="mybatis/mapper/"/>
+        <mapper resource="mybatis/mapper/FileMapper.xml"/>
+        <mapper resource="mybatis/mapper/OutsideReportMapper.xml"/>
     </mappers>
 </configuration>
