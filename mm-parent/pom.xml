@@ -118,6 +118,12 @@
 				<artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-spring-boot-starter.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-client</artifactId>
+				<version>1.5.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
