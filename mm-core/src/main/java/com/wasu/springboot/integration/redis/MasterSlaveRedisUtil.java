@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -106,27 +107,42 @@ public class MasterSlaveRedisUtil implements RedisUtil {
 
     @Override
     public void setMap(String key, String field, String value) {
-
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            jedis.hset(key,field,value).toString();
+        }
     }
 
     @Override
     public String getMap(String key, String field) {
-        return null;
+        key = prefix+key;
+        try(Jedis jedis=holder.getReadResource()){
+            return jedis.hget(key,field);
+        }
     }
 
     @Override
     public byte[] getMapBytes(String key, String field) {
-        return new byte[0];
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            return jedis.hget(key.getBytes(),field.getBytes());
+        }
     }
 
     @Override
     public void setMapBytes(String key, String field, byte[] value) {
-
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            jedis.hset(key.getBytes(),field.getBytes(),value).toString();
+        }
     }
 
     @Override
     public void removeMapField(String key, String... fields) {
-
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            jedis.hdel(key,fields);
+        }
     }
 
     @Override
@@ -145,14 +161,42 @@ public class MasterSlaveRedisUtil implements RedisUtil {
         }
     }
 
-    @Override
-    public boolean exists(String key) {
-        return false;
+    public Long removeKeys(String[] keys){
+        for(String key:keys){
+            key=prefix+key;
+        }
+        try(Jedis jedis=holder.getWriteResource()){
+            return jedis.del(keys);
+        }
+    }
+
+    public Long removeKeyWithoutPrefix(String key){
+        try(Jedis jedis=holder.getWriteResource()){
+            return jedis.del(key);
+        }
     }
 
     @Override
-    public List<String> getKeys(String pattern) {
-        return null;
+    public boolean exists(String key) {
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            return jedis.exists(key);
+        }
+    }
+
+    public boolean hexists(String key,String field) {
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            return jedis.hexists(key,field);
+        }
+    }
+
+    @Override
+    public List<String> getKeys(String key) {
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            return new ArrayList<>(jedis.keys(key));
+        }
     }
 
     @Override
@@ -165,37 +209,55 @@ public class MasterSlaveRedisUtil implements RedisUtil {
 
     @Override
     public Set<String> getMapKeys(String key) {
-        return null;
+        key = prefix+key;
+        try(Jedis jedis=holder.getReadResource()){
+            return jedis.hkeys(key);
+        }
     }
 
     @Override
     public List<String> hmget(String key, String... field) {
-        return null;
+        key = prefix+key;
+        try(Jedis jedis=holder.getReadResource()){
+            return jedis.hmget(key,field);
+        }
     }
 
     @Override
     public List<String> getMapValue(String key, String... field) {
-        return null;
+        key = prefix+key;
+        try(Jedis jedis=holder.getReadResource()){
+            return jedis.hmget(key,field);
+        }
     }
 
     @Override
     public void setMap(String key, Map<String, String> hash) {
-
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            jedis.hmset(key,hash);
+        }
     }
 
     @Override
     public Long incr(String key) {
-        return null;
+        key = prefix+key;
+        try(Jedis jedis=holder.getWriteResource()){
+            return jedis.incr(key);
+        }
     }
 
     @Override
     public void psubscribe(JedisPubSub jedisPubSub) {
-
+        subscribe(jedisPubSub,"*");
     }
+
 
     @Override
     public void subscribe(JedisPubSub listener, String... channles) {
-
+        try(Jedis jedis=holder.getWriteResource()){
+            jedis.subscribe(listener,channles);
+        }
     }
 
     @Override
