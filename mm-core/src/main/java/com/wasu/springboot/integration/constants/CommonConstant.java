@@ -16,4 +16,10 @@ public class CommonConstant {
     public final static int NUMBER_0=0;
 
     public final static int NUMBER_1=1;
+
+    public final static String USER_INFO_SESSION ="userInfo";
+
+    public final static String LOGINSTATETYPE ="web_loginState";
+
+    public final static String SESSION_KEY_PREFIX ="shiro_";
 }

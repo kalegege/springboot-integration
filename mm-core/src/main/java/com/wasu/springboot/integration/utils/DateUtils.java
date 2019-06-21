@@ -8,14 +8,14 @@ import java.util.*;
 public class DateUtils {
 
     private static final String[] DAYNAMES = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
-    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final List<String> DATE_FORMATE_LIST = new ArrayList<>(Arrays.asList(
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final List<String> DATE_FORMATE_LIST = new ArrayList<>(Arrays.asList(
             "yyyy-MM-dd", "yyyy/MM/dd", "yyyy/MM/dd", "yyyyMMdd"
     ));
-    private static final String DATE_FORMATE_1 = "yyyy-MM-dd";
-    private static final String DATE_FORMATE_2 = "yyyy/MM/dd";
-    private static final String DATE_FORMATE_3 = "yyyy/MM/dd";
-    private static final String DATE_FORMATE_4 = "yyyyMMdd";
+    public static final String DATE_FORMATE_1 = "yyyy-MM-dd";
+    public static final String DATE_FORMATE_2 = "yyyy/MM/dd";
+    public static final String DATE_FORMATE_3 = "yyyy/MM/dd";
+    public static final String DATE_FORMATE_4 = "yyyyMMdd";
 
     public static Date getNow() {
         return new Date();
@@ -226,4 +226,6 @@ public class DateUtils {
         calendar.add(5,day);
         return calendar.getTime();
     }
+
+
 }
