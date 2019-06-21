@@ -1,5 +1,9 @@
 package com.wasu.springboot.integration.utils;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     public static final String CHARSET_ENCODING="UTF-8";
@@ -35,5 +39,56 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if(str.length()<num) return str;
 
         return num > 0 ? str.substring(0,num):str;
+    }
+
+    public static String getStackTraceAsString(Throwable e) {
+        StringWriter stringWriter=null;
+        PrintWriter printWriter=null;
+        StringBuffer error=null;
+        try{
+            stringWriter=new StringWriter();
+
+            printWriter=new PrintWriter(stringWriter);
+
+            e.printStackTrace(printWriter);
+
+            error=stringWriter.getBuffer();
+            return error.toString();
+        }catch(Throwable localThrowable){
+            try{
+                if(printWriter != null){
+                    printWriter.flush();
+                    printWriter.close();
+                }
+            }catch(Exception e1){
+                e1.printStackTrace();
+            }
+            try{
+                if(stringWriter != null){
+                    stringWriter.flush();
+                    stringWriter.close();
+                }
+            }catch(Exception e2){
+                e2.printStackTrace();
+            }
+        } finally{
+            try{
+                if(printWriter != null){
+                    printWriter.flush();
+                    printWriter.close();
+                }
+            }catch(Exception e1){
+                e1.printStackTrace();
+            }
+            try{
+                if(stringWriter != null){
+                    stringWriter.flush();
+                    stringWriter.close();
+                }
+            }catch(Exception e2){
+                e2.printStackTrace();
+            }
+        }
+        return "";
     }
 }

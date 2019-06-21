@@ -2,12 +2,14 @@ package com.wasu.springboot.integration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-public class SpringbootModelApplication {
+@EnableDiscoveryClient
+public class GatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootModelApplication.class, args);
+		SpringApplication.run(GatewayApplication.class, args);
 	}
 
 }

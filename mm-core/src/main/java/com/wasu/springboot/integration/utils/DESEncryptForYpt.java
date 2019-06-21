@@ -1,4 +1,4 @@
-package newdb.util;
+package com.wasu.springboot.integration.utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -189,40 +189,40 @@ public class DESEncryptForYpt
 	public static void main(String[] args) {
 		try {
 			//测试密匙
-			DESEncryptForYpt desForYpt = new DESEncryptForYpt();
-			String Username = "kangmin";
-			String ShowName = "康大敏";
-			String Role = "测试小组组长";
-			String Department = "测大金融终端开发部";
-
-			Date now = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			Date afterDate = new Date(now .getTime() + 3600000000000L);
-
-			String jumpurl = "/main.html#/officehall";
-			String codeString= "浙政钉;" + Username + ";" + (ShowName == null ? "" : ShowName.replace(";", "；"))
-					+ ";" + Role + ";" + sdf.format(afterDate);
-			if (jumpurl != null)
-				codeString += ";" + jumpurl+";"+Department;
-			String token = desForYpt.encrypt(URLEncoder.encode(codeString,"UTF8"), "FB50C865");//  这个加密后值
-
+//			DESEncryptForYpt desForYpt = new DESEncryptForYpt();
+//			String Username = "kangmin";
+//			String ShowName = "康领导";
+//			String Role = "测试小组组长";
+//			String Department = "厅领导";
+//
+//			Date now = new Date();
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//			Date afterDate = new Date(now .getTime() + 3600000000000L);
+//
+//			String jumpurl = "/main.html#/officehall";
+//			String codeString= "浙政钉;" + Username + ";" + (ShowName == null ? "" : ShowName.replace(";", "；"))
+//					+ ";" + Role + ";" + sdf.format(afterDate);
+//			if (jumpurl != null)
+//				codeString += ";" + jumpurl+";"+Department;
+//			String token = desForYpt.encrypt(URLEncoder.encode(codeString,"UTF8"), "FB50C865");//  这个加密后值
+//
 
 
 
 			// 通过OA系统 访问各自系统   URL 后面跟token
 
-			String url = "http://202.107.205.5:8705/stbrain/relativeUserLogin.do?token="+token;
-			System.out.println(url);
+//			String url = "http://202.107.205.5:8705/stbrain/relativeUserLogin.do?token="+token;
+//			System.out.println(url);
 
 			String key = "FB50C865";
-			DESEncryptForYpt dd = new DESEncryptForYpt();
-			String ew = dd.decrypt(token,key);
-			System.out.println(ew);
-
+//			DESEncryptForYpt dd = new DESEncryptForYpt();
+//			String ew = dd.decrypt(token,key);
+//			System.out.println(ew);
+			String token1="K6JxoIKjKoHiDi3GUEZGGp03Cn9nJJNw!IhL8MfPytR3YcxLijSOU6snFsMNVkY7xWxrMUAsD0JH45KzmKWBACfwH0-OSB36BMK1x5PVcwNc9bAv3XpiJlh2DoyuUNldfpVClVTvUcYxaFllklB!U1FgER-LzKntvR1nuEKPjCIAR44eG3dAN1BKSYZiGWWmUUgFVOWMd7q6tPiZccQEqfbBiz7wI52hOSUz1-678ogKi4G2SUm9Tdt9pGOckhm-go8JIajh7lZUWgMSMzpIcLHAy5Co-F!6cSRkU2B1bZI!fcNU4D!Y4IHaV56YdKLL4MkbgWno72yA69DN582OoIZu9jh4kd!FzukdeWHeoU72s-NqrKYDsgP-cHu6U5fg-0nVkWA8gPdwqDPm5dUaucMPSSc2cCKF";
+			String token="K6JxoIKjKoHiDi3GUEZGGp03Cn9nJJNw!IhL8MfPytR3YcxLijSOU6snFsMNVkY7xWxrMUAsD0KhxNIpw3TDSWnQfTbhkO-sNw06MEtZhDby3wSYU5sNxYTEz0BZHk1!Dus3ed2jqZsQpFUKDblt9CbyGN9TxC7jtnqJSO!pJSpxA1a324QN4MwtjVc4hlnWp12Bxy5ouGCql!PEYA2drXzCChWPg3gVTKkFz4buUhnVRgqhCUPzkWnM-kePCKWrv98-2XIQz0hn5e-6xV9HgowPrpoV4lqzNAjqIi!32UDfyNpGeceQDF1n5VgVrQaSC!m!Qt3X9EJ1HtpEimseHWg8HjdAJwRCknT3zUtykf17TQyoHVpVsLschYNWg0EP0hFTrrps8fGS3yl7jPbfsVS8nHknWYySJAED-4AzJIs_";
 //				String key = "QYQWINGS";
-//	           DESEncryptForYpt dd = new DESEncryptForYpt();
-//	           String ew = dd.decrypt("7Di4C5AiqyeGYa-IzU9IGjczvWwjEJo0UYJoq-r-ibB9j61PeWunu8eWiPjvohrL65VPxf5WfDPbmUR-YaQofZakaOA7w9ywJeiRCxLIK0m-IWc8dkfSx8LOzGfyT4ITa5SNs7vmFc7AVJ2TIaUpItaGgmunux-g7i5W-ZblGsvGF9PXBdbnCSxGY8Fc6EI8tGr!yE!rfSUYhA20rIXi3FweptyA-BrS9iDMGagZhbsVsYLkRRgvfJm1mzMPu989Om88hHRmprZEygyIQK7GxiysA7aYSN2H-nFQZXopPkR1Ee76TiOr4nFdg2AJAll1aqQufKK3kY61kXjPYve6Vo6QeDgMl0iRrMlQvD0RhiJGI-M6-6czu3ChOW2BEQMofw3Rxeitg-M2Nfk6R4lr2v51szunil0ekd6dZohNrZ93Ks2s0X!LXSG6V1SvSqzLjmKq5q4nkrOrQRHSpIiOoNmszVTGRAVB7tkKwVeXlTnuie0dXAfw6lRVIYIZhIeM2jPDrhOvoWlNYLze6p4D8mHL6XZg-6Z!CwnsTcMexAV3utkf02LAXmREmfxc3wB6cNTV2yOB1FUIakYfzeTslpDF5cnk9Q8rB2xdx7uPlwjvgVaPlQ86AIvs5hiTuTHL4JqehDt4l4syORE-8R3LsvnezFkRdTGvZVgwGQxLgs5yCNRwHGPxe2YhhmbaH8ze",key);
-//	           System.out.println(ew);
+			String ew2 = DESEncryptForYpt.decrypt(token1);
+	        System.out.println(ew2);
 
 		} catch (Exception e) {
 			e.printStackTrace();
