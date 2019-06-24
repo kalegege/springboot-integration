@@ -13,6 +13,18 @@ public class WebUtils {
         return IpUtils.getRemoteIp(request);
     }
 
+    public static String getBasePath(HttpServletRequest request){
+        String path=request.getContextPath();
+        String basePath=request.getScheme() + "://"+request.getServerName()
+                +":"+request.getServerPort()+path+"/";
+        return basePath;
+    }
+
+    /**
+     * 从request中取出参数并封装成string
+     * @param request
+     * @return
+     */
     public static String transRequestToString(HttpServletRequest request){
         if(request == null){
             return null;
