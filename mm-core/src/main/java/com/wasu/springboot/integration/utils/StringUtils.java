@@ -91,4 +91,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return "";
     }
+
+    public static String subString(String str,int length,boolean trim){
+        if(isBlank(str)){
+            return str;
+        }
+        str=trim?str.trim():str;
+        str=str.length() > length? str.substring(0,length) : str;
+        return str;
+    }
 }

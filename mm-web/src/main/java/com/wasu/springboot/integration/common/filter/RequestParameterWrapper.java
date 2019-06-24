@@ -21,7 +21,7 @@ public class RequestParameterWrapper extends HttpServletRequestWrapper {
         addParameters(extraParams);
     }
 
-    private void addParameters(Map<String, Object> extraParams) {
+    public void addParameters(Map<String, Object> extraParams) {
         for (Map.Entry<String,Object> entry:extraParams.entrySet()) {
             addParameters(entry.getKey(),entry.getValue());
         }

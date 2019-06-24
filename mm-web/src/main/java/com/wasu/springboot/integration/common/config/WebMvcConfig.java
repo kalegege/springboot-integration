@@ -1,13 +1,14 @@
 package com.wasu.springboot.integration.common.config;
 
+import com.wasu.springboot.integration.common.filter.AddCommonAttributeFilter;
 import com.wasu.springboot.integration.common.interceptor.UserStatusInterceptor;
 import com.wasu.springboot.integration.common.interceptor.UserUriRequestPermissionInterceptor;
 import com.wasu.springboot.integration.utils.StringToDateConverter;
 import com.wasu.springboot.integration.utils.StringToListConverter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -22,6 +23,20 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         InterceptorRegistration userUriRequestPermissionInterceptor =registry.addInterceptor(userUriRequestPermissionInterceptor());
 
         super.addInterceptors(registry);
+    }
+
+    @Bean
+    public AddCommonAttributeFilter addCommonAttributeFilter(){
+        return new AddCommonAttributeFilter();
+    }
+
+    @Bean
+    public FilterRegistrationBean addCommonAttributeFilterRegistrationBean(){
+        FilterRegistrationBean baseFilterRegistrationBean=new FilterRegistrationBean();
+        baseFilterRegistrationBean.setFilter(addCommonAttributeFilter());
+        baseFilterRegistrationBean.addUrlPatterns(new String[]{"/*"});
+        baseFilterRegistrationBean.setOrder(3);
+        return baseFilterRegistrationBean;
     }
 
     @Bean
