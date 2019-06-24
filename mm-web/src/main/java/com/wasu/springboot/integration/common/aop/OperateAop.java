@@ -2,7 +2,6 @@ package com.wasu.springboot.integration.common.aop;
 
 import com.wasu.springboot.integration.common.shiro.ShiroUtils;
 import com.wasu.springboot.integration.constants.CommonCodeConstant;
-import com.wasu.springboot.integration.constants.CommonConstant;
 import com.wasu.springboot.integration.entity.system.ActiveUser;
 import com.wasu.springboot.integration.entity.system.PubOperateRecord;
 import com.wasu.springboot.integration.enums.OperationTypeEnum;
