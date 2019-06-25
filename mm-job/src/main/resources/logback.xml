@@ -4,7 +4,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <jmxConfigurator/>
 
-    <contextName>mm-service</contextName>
+    <contextName>mm-job</contextName>
 
     <!--<property resource="application.properties"/>-->
     <!--<property name="log.project" value="mm"/>-->

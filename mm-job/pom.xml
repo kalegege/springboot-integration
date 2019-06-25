@@ -33,31 +33,38 @@
 			<artifactId>mm-entity</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.wasu</groupId>
-			<artifactId>mm-service</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.wasu</groupId>-->
+			<!--<artifactId>mm-service</artifactId>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-		</dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.aspectj</groupId>-->
+			<!--<artifactId>aspectjrt</artifactId>-->
+			<!--<version>${aspectj.version}</version>-->
+		<!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.aspectj</groupId>-->
+            <!--<artifactId>aspectjweaver</artifactId>-->
+            <!--<version>${aspectj.version}</version>-->
+        <!--</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,12 +79,23 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -37,9 +37,9 @@ public class SchedledConfiguration {
     public SchedledConfiguration() {
     }
 
-    @Bean(name="concurrenttaskExecutor")
-    @Qualifier("concurrenttaskExecutor")
-    public Executor concurrenttaskExecutor(){
+    @Bean(name="concurrentTaskExecutor")
+    @Qualifier("concurrentTaskExecutor")
+    public Executor concurrentTaskExecutor(){
         ThreadPoolTaskExecutor executor=new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(COREPOOLSIZE);
         executor.setMaxPoolSize(MAXPOOLSIZE);
