@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>com.wasu</groupId>
-		<artifactId>mm-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../mm-parent</relativePath> <!-- lookup parent from repository -->
-	</parent>
+	<!--<parent>-->
+		<!--<groupId>com.wasu</groupId>-->
+		<!--<artifactId>mm-parent</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+		<!--<relativePath>../mm-parent</relativePath> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+	<!--</parent>-->
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Dalston.SR5</version>
+        <relativePath/>
+    </parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wasu</groupId>
@@ -32,6 +38,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+
+		<!--<dependency>-->
+			<!--<groupId>org.eclipse.jgit</groupId>-->
+			<!--<artifactId>org.eclipse.jgit</artifactId>-->
+			<!--<version>4.8.0.201706111038-r</version>-->
+		<!--</dependency>-->
 	</dependencies>
 
 	<profiles>
