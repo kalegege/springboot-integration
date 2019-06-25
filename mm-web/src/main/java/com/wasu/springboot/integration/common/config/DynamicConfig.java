@@ -8,11 +8,14 @@ public class DynamicConfig {
     @Value("${mm.name}")
     private String webServiceName;
 
+    @Value("mm-service.name")
+    private String systemServiceName;
+
     public String getWebServiceName() {
         return webServiceName;
     }
 
-    public void setWebServiceName(String webServiceName) {
-        this.webServiceName = webServiceName;
+    public String getSystemServiceName() {
+        return systemServiceName;
     }
 }

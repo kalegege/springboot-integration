@@ -208,7 +208,7 @@ public class HttpClientUtils {
         return postForJson(uri, params, charset, null);
     }
 
-    private static String postObjectForJson(String uri, Object param, String charset, Map<String, String> headers) {
+    public static String postObjectForJson(String uri, Object param, String charset, Map<String, String> headers) {
         Map<String, Object> paramMap = MapUtils.populateMap(param);
         return postForJson(uri, paramMap, charset, headers);
     }
@@ -325,6 +325,69 @@ public class HttpClientUtils {
         } finally {
             abort(post);
             close(httpClient, response);
+        }
+        return null;
+    }
+
+    public static String postForOneFile(String uri, Map<String, Object> params, String fileParamName,
+                                        InputStream fileInputStream, String fileName, String charset,
+                                        Map<String, String> headers) {
+        boolean isFileNull;
+        if(null == fileParamName && null==fileInputStream && null == fileName){
+            isFileNull =true;
+        }else if (null != fileParamName &&null != fileInputStream&& null != fileName){
+            isFileNull = false;
+        }else{
+            throw new BaseCoreException("params must all null or not null");
+        }
+
+        CloseableHttpClient httpClient=null;
+        CloseableHttpResponse response=null;
+        HttpPost post=new HttpPost(uri);
+
+        MultipartEntityBuilder muli =MultipartEntityBuilder.create().setMode(HttpMultipartMode.BROWSER_COMPATIBLE).setCharset(Consts.UTF_8);
+        if(null != params &&!params.isEmpty()){
+            for(Map.Entry<String,Object> current:params.entrySet()){
+                if(null == current.getValue()){
+                    muli.addTextBody(current.getKey(),"",ContentType.create("text/plain",Consts.UTF_8));
+                }else{
+                    muli.addTextBody(current.getKey(),current.getValue().toString(),ContentType.create("text/plain",Consts.UTF_8));
+                }
+            }
+        }
+
+        if(!isFileNull){
+            muli.addPart(fileParamName,new InputStreamBody(fileInputStream,fileName));
+        }
+
+        if(null != headers && !headers.isEmpty()){
+            for(Map.Entry<String,String> current:headers.entrySet()){
+                post.addHeader(current.getKey(),current.getValue());
+            }
+        }
+
+        HttpEntity request=muli.build();
+        try{
+            httpClient=getHttpClient(uri);
+            post.setEntity(request);
+            HttpEntity entity=execute(httpClient,response,post);
+            if(entity != null){
+                try{
+                    String result = EntityUtils.toString(entity,charset);
+
+                    if(LOGGER.isDebugEnabled()){
+                        LOGGER.debug("request url ="+uri +",params = "+MapUtils.transMapToString(params)+",result ="+result);
+                    }
+                    return result;
+                }catch(Exception e){
+                    LOGGER.error("request url ="+uri +",params = "+MapUtils.transMapToString(params)+",error ="+StringUtils.getStackTraceAsString(e));
+                }
+            }
+        }catch(Exception e){
+            LOGGER.error("request url ="+uri +",params = "+MapUtils.transMapToString(params)+",error ="+StringUtils.getStackTraceAsString(e));
+        }finally {
+            abort(post);
+            close(httpClient,response);
         }
         return null;
     }
