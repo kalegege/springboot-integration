@@ -36,4 +36,37 @@ public class AnnotationUtils extends org.springframework.core.annotation.Annotat
         }
         return null;
     }
+
+    public static boolean chechAnnotationExist(Class obj, Class<? extends Annotation>... expectAnnotations) {
+        try{
+            Annotation[] annotations=obj.getAnnotations();
+            for(Annotation anno:annotations){
+                for(Class<? extends Annotation> expectAnno : expectAnnotations){
+                    if(anno.annotationType().equals(expectAnno)){
+                        return true;
+                    }
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean chechAnnotationExist(Class obj,String method,Class<? extends Annotation> annotation) {
+        try{
+            for(Method m:obj.getMethods()){
+                if(m.getName().equals(method)){
+                    for(Annotation anno:m.getDeclaredAnnotations()){
+                        if(anno.annotationType().equals(annotation)){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
