@@ -12,6 +12,26 @@ public class UserInfo extends BaseEntity{
 
     private String passwd;
 
+    private Integer relationType;
+
+    private Integer role;
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public Integer getRelationType() {
+        return relationType;
+    }
+
+    public void setRelationType(Integer relationType) {
+        this.relationType = relationType;
+    }
+
     public String getName() {
         return name;
     }

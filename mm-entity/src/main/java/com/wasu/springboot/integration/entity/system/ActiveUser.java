@@ -1,5 +1,8 @@
 package com.wasu.springboot.integration.entity.system;
 
+import java.util.List;
+import java.util.Set;
+
 public class ActiveUser implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,7 +19,25 @@ public class ActiveUser implements java.io.Serializable {
 
     private boolean flag;
 
+    private Set<String> roleSet;
 
+    private Set<String> permissionSet;
+
+    public Set<String> getRoleSet() {
+        return roleSet;
+    }
+
+    public void setRoleSet(Set<String> roleSet) {
+        this.roleSet = roleSet;
+    }
+
+    public Set<String> getPermissionSet() {
+        return permissionSet;
+    }
+
+    public void setPermissionSet(Set<String> permissionSet) {
+        this.permissionSet = permissionSet;
+    }
 
     public Long getUserid() {
         return userid;

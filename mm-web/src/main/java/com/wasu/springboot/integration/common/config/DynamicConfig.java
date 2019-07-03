@@ -11,11 +11,18 @@ public class DynamicConfig {
     @Value("mm-service.name")
     private String systemServiceName;
 
+    @Value("redis.shiro.prefix")
+    private String sessionKeyPrefix;
+
     public String getWebServiceName() {
         return webServiceName;
     }
 
     public String getSystemServiceName() {
         return systemServiceName;
+    }
+
+    public String getSessionKeyPrefix() {
+        return sessionKeyPrefix;
     }
 }
