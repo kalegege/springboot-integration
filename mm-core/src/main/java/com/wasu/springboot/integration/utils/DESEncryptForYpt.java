@@ -190,23 +190,23 @@ public class DESEncryptForYpt
 	public static void main(String[] args) {
 		try {
 			//测试密匙
-//			DESEncryptForYpt desForYpt = new DESEncryptForYpt();
-//			String Username = "kangmin";
-//			String ShowName = "康领导";
-//			String Role = "测试小组组长";
-//			String Department = "厅领导";
-//
-//			Date now = new Date();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//			Date afterDate = new Date(now .getTime() + 3600000000000L);
-//
-//			String jumpurl = "/main.html#/officehall";
-//			String codeString= "浙政钉;" + Username + ";" + (ShowName == null ? "" : ShowName.replace(";", "；"))
-//					+ ";" + Role + ";" + sdf.format(afterDate);
-//			if (jumpurl != null)
-//				codeString += ";" + jumpurl+";"+Department;
-//			String token = desForYpt.encrypt(URLEncoder.encode(codeString,"UTF8"), "FB50C865");//  这个加密后值
-//
+			DESEncryptForYpt desForYpt = new DESEncryptForYpt();
+			String Username = "kangmin";
+			String ShowName = "康领导";
+			String Role = "测试小组组长";
+			String Department = "人事处";
+
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date afterDate = new Date(now .getTime() + 3600000000000L);
+
+			String jumpurl = "/main.html#/officehall";
+			String codeString= "浙政钉;" + Username + ";" + (ShowName == null ? "" : ShowName.replace(";", "；"))
+					+ ";" + Role + ";" + sdf.format(afterDate);
+			if (jumpurl != null)
+				codeString += ";" + jumpurl+";"+Department;
+			String token = desForYpt.encrypt(URLEncoder.encode(codeString,"UTF8"), "FB50C865");//  这个加密后值
+
 
 
 
@@ -219,39 +219,39 @@ public class DESEncryptForYpt
 //			DESEncryptForYpt dd = new DESEncryptForYpt();
 //			String ew = dd.decrypt(token,key);
 //			System.out.println(ew);
-			String token1="K6JxoIKjKoHiDi3GUEZGGp03Cn9nJJNw!IhL8MfPytR3YcxLijSOU6snFsMNVkY7xWxrMUAs" +
-					"D0KFxlYbSXyWBPIbut3gO9UNz!-A!zNssm6wvhTP04Ry!rTidhXax8xF3vn!JkrV-kgyT!M78XMd!IN5" +
-					"Xmx8LJgbJPfszo-XbiqZKbrLvv2bWI23k2!KNoW0hfq4hJK0VyHwTNKo351nRqJ0xkh1nzEG9LleH-ur" +
-					"6lUQPlNAhXYJ7hd0LqlhA!2uLtgOmFzSPq0D!Th5e14KhT41sd!G6KSKPDpXBBUO1YCO80J5Rph8WmX!" +
-					"UvYNiIsOskK!d4YDf9v-Q55Gc!wZHVjzOoj!sLCX-yweRg!1nI7rcIB1CZoiGomAwz5dwgOgrJYN7HOo" +
-					"shQ6C0teXXCDfJ2oVqIrP9oQJd3u7P34dIACV-1fmjidngkEOsXPIEcRyXEh2PFfVjzXkNkCUjbGUIpm" +
-					"r5CTFW50jVJBOItAV5gofF18Q21HzuN4-1H5ZneZas1MjcI4Ase1VNYciio9P5D2gD6du54phcSK63C!" +
-					"9lRSfhu5RxB5QFncazDUDmyyUqlC0UDRLuimo2qFu6dcYJsqEzS659DBdd1C9YnGe64aehdZdut13RII" +
-					"!Xzfv7OjQqkAXg!JBrfLSaiIRj3QZYySBRUP5Xt3iIbN9dVV2zrVH4v5M6ZAKyF84D0AL4HAcKjr6Jgb" +
-					"mR-1FvDWrLinwhLX3HckKeXWD0Ms4ECSDPgZLsteDZJcqP!ecVv52P2MwkVd5XUe65ow14gr-B-zuW95" +
-					"Kg7DOgePx-jSglg24wCOyGDPXaGh7AG7PiAqkwvrJYsl!23Mu6t1p-zIaf!gN1ZngRjJggXECBo8mk6P" +
-					"WJxrD-bF61Dh0xPLo5z06aYFv9T9PZRPJSXHQu1Rf9QR7rIzD4A7u0Q5sM2ckt7LByPomtXMAN5FDAzO" +
-					"SttGAgX2zYrDsShBqWiVhwungtSx1gO-G6ZqWqRJsrvpGAWl6wEiDrs56FYMgvactJ9CGP4LddsEOV-D" +
-					"oamcMn5hixcgOLqoT!cuDu0U0xkFT!IWlq5XX28D32VBk1iNtYBZNvykAjyB5Q5Jnjed7r-!lqPVMIx9" +
-					"dvYeMTDSLeE0fnoItx13SGr1!F5uc-nMCq!mRizCkqMPsPuEFkSrrzpOh9-LOY-RvaXIgMFu!LJ4kdES" +
-					"cXkwaJevN57!4oU53dHqA13fxMxkrf6ma3b8Wf9AFIft!Zdp21CCwo-9gdQem-6Pa4gwSsKvRv2iI3WA" +
-					"uhFSoFOupXlQ1pK6N5Cte94Jvmmm0LUPuWzo2lwbwIxAB5eWKVsxk5gCW9MKCq5KA-M7PT663WqnBCiN" +
-					"KQZ8Bud-Q1Va8t5TqfCKF6gc2CHso6IOfMHyPLQ!MLQlYCaGkBS84yeIWSouXwBduJbupNF-mKdIHR45" +
-					"TySTp0GH7GmwLF!Q3bpURL2nWM-nXFJVsMYITb688T-EPBUwbMVdLDCZ5HgkicKNo3S-NVvexv7!nd-g" +
-					"seZBh8FCBFmzVR-fFvP0YYxvukP2ViawujWHbONBLRtA2D9e0NEWQKGlAuve1zn598kc9LtLgKq1nBai" +
-					"u6pY!JHUSeDql6RAT5OB27d6zU0nEMu1mxf6JJWEgw!qWkEpa801DGehM5m2fq81lzgp32JqOvSZDMqp" +
-					"MWYw3HG5!jhYEasQ4Rp88xXjtxhJPm3GFQNoY1Skz-kzsOIgND4npDnwVmsLavkkMxJUw9i8ICyQRuoW" +
-					"XrAxzDYS97NsOm4a26HyEaj0sZ2GxF2romhdCArrM2m49!2k0AAKfb8jvvwO0iGA9R15MoSd3So1IDED" +
-					"DDcnafpCie2eBv5mlFs!9--LyKozrox5zK6HiIktt97btbpoXtUhNhjIFPEgW61pKEq3XRLPLEvaJer6" +
-					"nnBJ!IeTC1JcHCe3GnC6S55meFIdPtF4MBv3ux5eer2Phzzyexi5ZfFV!Uswhn1M2jM90TGBlPnvCaXF" +
-					"DLsLDUOSBumqwptXz!effbh7nAjzJNAb-K2hqsFK75lIfxlWPLuZRlh-Dc2krKdWjovgV!8yvTx3pDdl" +
-					"ue8BZtEr-sKe0KuE0uhRYNQ8VQuqOcMFnyWINDep9P8YavUsIyFRlkFvDQD1Rd6!JQlS1u1DRxCYOiNi" +
-					"ywoq3970f1wBi0fwohnmg!fyspYVverTsP7icBLsRj7KbiVCemsjsNzzyiFtkgQskN0eKhegwXB!Qw__";
-					String token="K6JxoIKjKoHiDi3GUEZGGp03Cn9nJJNw!IhL8MfPytR3YcxLijSOU6snFsMNVkY7xWxrMUAsD0KhxNIpw3TDSWnQfTbhkO-sNw06MEtZhDby3wSYU5sNxYTEz0BZHk1!Dus3ed2jqZsQpFUKDblt9CbyGN9TxC7jtnqJSO!pJSpxA1a324QN4MwtjVc4hlnWp12Bxy5ouGCql!PEYA2drXzCChWPg3gVTKkFz4buUhnVRgqhCUPzkWnM-kePCKWrv98-2XIQz0hn5e-6xV9HgowPrpoV4lqzNAjqIi!32UDfyNpGeceQDF1n5VgVrQaSC!m!Qt3X9EJ1HtpEimseHWg8HjdAJwRCknT3zUtykf17TQyoHVpVsLschYNWg0EP0hFTrrps8fGS3yl7jPbfsVS8nHknWYySJAED-4AzJIs_";
+//			String token1="K6JxoIKjKoHiDi3GUEZGGp03Cn9nJJNw!IhL8MfPytR3YcxLijSOU6snFsMNVkY7xWxrMUAs" +
+//					"D0KFxlYbSXyWBPIbut3gO9UNz!-A!zNssm6wvhTP04Ry!rTidhXax8xF3vn!JkrV-kgyT!M78XMd!IN5" +
+//					"Xmx8LJgbJPfszo-XbiqZKbrLvv2bWI23k2!KNoW0hfq4hJK0VyHwTNKo351nRqJ0xkh1nzEG9LleH-ur" +
+//					"6lUQPlNAhXYJ7hd0LqlhA!2uLtgOmFzSPq0D!Th5e14KhT41sd!G6KSKPDpXBBUO1YCO80J5Rph8WmX!" +
+//					"UvYNiIsOskK!d4YDf9v-Q55Gc!wZHVjzOoj!sLCX-yweRg!1nI7rcIB1CZoiGomAwz5dwgOgrJYN7HOo" +
+//					"shQ6C0teXXCDfJ2oVqIrP9oQJd3u7P34dIACV-1fmjidngkEOsXPIEcRyXEh2PFfVjzXkNkCUjbGUIpm" +
+//					"r5CTFW50jVJBOItAV5gofF18Q21HzuN4-1H5ZneZas1MjcI4Ase1VNYciio9P5D2gD6du54phcSK63C!" +
+//					"9lRSfhu5RxB5QFncazDUDmyyUqlC0UDRLuimo2qFu6dcYJsqEzS659DBdd1C9YnGe64aehdZdut13RII" +
+//					"!Xzfv7OjQqkAXg!JBrfLSaiIRj3QZYySBRUP5Xt3iIbN9dVV2zrVH4v5M6ZAKyF84D0AL4HAcKjr6Jgb" +
+//					"mR-1FvDWrLinwhLX3HckKeXWD0Ms4ECSDPgZLsteDZJcqP!ecVv52P2MwkVd5XUe65ow14gr-B-zuW95" +
+//					"Kg7DOgePx-jSglg24wCOyGDPXaGh7AG7PiAqkwvrJYsl!23Mu6t1p-zIaf!gN1ZngRjJggXECBo8mk6P" +
+//					"WJxrD-bF61Dh0xPLo5z06aYFv9T9PZRPJSXHQu1Rf9QR7rIzD4A7u0Q5sM2ckt7LByPomtXMAN5FDAzO" +
+//					"SttGAgX2zYrDsShBqWiVhwungtSx1gO-G6ZqWqRJsrvpGAWl6wEiDrs56FYMgvactJ9CGP4LddsEOV-D" +
+//					"oamcMn5hixcgOLqoT!cuDu0U0xkFT!IWlq5XX28D32VBk1iNtYBZNvykAjyB5Q5Jnjed7r-!lqPVMIx9" +
+//					"dvYeMTDSLeE0fnoItx13SGr1!F5uc-nMCq!mRizCkqMPsPuEFkSrrzpOh9-LOY-RvaXIgMFu!LJ4kdES" +
+//					"cXkwaJevN57!4oU53dHqA13fxMxkrf6ma3b8Wf9AFIft!Zdp21CCwo-9gdQem-6Pa4gwSsKvRv2iI3WA" +
+//					"uhFSoFOupXlQ1pK6N5Cte94Jvmmm0LUPuWzo2lwbwIxAB5eWKVsxk5gCW9MKCq5KA-M7PT663WqnBCiN" +
+//					"KQZ8Bud-Q1Va8t5TqfCKF6gc2CHso6IOfMHyPLQ!MLQlYCaGkBS84yeIWSouXwBduJbupNF-mKdIHR45" +
+//					"TySTp0GH7GmwLF!Q3bpURL2nWM-nXFJVsMYITb688T-EPBUwbMVdLDCZ5HgkicKNo3S-NVvexv7!nd-g" +
+//					"seZBh8FCBFmzVR-fFvP0YYxvukP2ViawujWHbONBLRtA2D9e0NEWQKGlAuve1zn598kc9LtLgKq1nBai" +
+//					"u6pY!JHUSeDql6RAT5OB27d6zU0nEMu1mxf6JJWEgw!qWkEpa801DGehM5m2fq81lzgp32JqOvSZDMqp" +
+//					"MWYw3HG5!jhYEasQ4Rp88xXjtxhJPm3GFQNoY1Skz-kzsOIgND4npDnwVmsLavkkMxJUw9i8ICyQRuoW" +
+//					"XrAxzDYS97NsOm4a26HyEaj0sZ2GxF2romhdCArrM2m49!2k0AAKfb8jvvwO0iGA9R15MoSd3So1IDED" +
+//					"DDcnafpCie2eBv5mlFs!9--LyKozrox5zK6HiIktt97btbpoXtUhNhjIFPEgW61pKEq3XRLPLEvaJer6" +
+//					"nnBJ!IeTC1JcHCe3GnC6S55meFIdPtF4MBv3ux5eer2Phzzyexi5ZfFV!Uswhn1M2jM90TGBlPnvCaXF" +
+//					"DLsLDUOSBumqwptXz!effbh7nAjzJNAb-K2hqsFK75lIfxlWPLuZRlh-Dc2krKdWjovgV!8yvTx3pDdl" +
+//					"ue8BZtEr-sKe0KuE0uhRYNQ8VQuqOcMFnyWINDep9P8YavUsIyFRlkFvDQD1Rd6!JQlS1u1DRxCYOiNi" +
+//					"ywoq3970f1wBi0fwohnmg!fyspYVverTsP7icBLsRj7KbiVCemsjsNzzyiFtkgQskN0eKhegwXB!Qw__";
+//					String token="K6JxoIKjKoHiDi3GUEZGGp03Cn9nJJNw!IhL8MfPytR3YcxLijSOU6snFsMNVkY7xWxrMUAsD0KhxNIpw3TDSWnQfTbhkO-sNw06MEtZhDby3wSYU5sNxYTEz0BZHk1!Dus3ed2jqZsQpFUKDblt9CbyGN9TxC7jtnqJSO!pJSpxA1a324QN4MwtjVc4hlnWp12Bxy5ouGCql!PEYA2drXzCChWPg3gVTKkFz4buUhnVRgqhCUPzkWnM-kePCKWrv98-2XIQz0hn5e-6xV9HgowPrpoV4lqzNAjqIi!32UDfyNpGeceQDF1n5VgVrQaSC!m!Qt3X9EJ1HtpEimseHWg8HjdAJwRCknT3zUtykf17TQyoHVpVsLschYNWg0EP0hFTrrps8fGS3yl7jPbfsVS8nHknWYySJAED-4AzJIs_";
 //				String key = "QYQWINGS";
-			String ew2 = DESEncryptForYpt.decrypt(token1);
-			System.out.println(URLDecoder.decode(ew2));
-			System.out.println("12");
+//			String ew2 = DESEncryptForYpt.decrypt(token1);
+//			System.out.println(URLDecoder.decode(ew2));
+//			System.out.println("12");
 
 		} catch (Exception e) {
 			e.printStackTrace();

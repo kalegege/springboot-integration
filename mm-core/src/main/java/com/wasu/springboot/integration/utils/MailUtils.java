@@ -6,27 +6,25 @@ import org.slf4j.LoggerFactory;
 import javax.mail.*;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Properties;
 
 public class MailUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(MailUtils.class);
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         // 定义连接POP3服务器的属性信息
         String pop3Server = "pop.qq.com";
         String protocol = "imap";
         String username = "330790416@qq.com";
-        String password_pop3= "cmngizqlmbgrbhjb"; // QQ邮箱的SMTP的授权码，什么是授权码，它又是如何设置？
+        String password_pop3 = "cmngizqlmbgrbhjb"; // QQ邮箱的SMTP的授权码，什么是授权码，它又是如何设置？
         String password = "enatjjudlnmlbihf";
 
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", protocol); // 使用的协议（JavaMail规范要求）
         props.setProperty("mail.smtp.host", pop3Server); // 发件人的邮箱的 SMTP服务器地址
-        props.setProperty("mail."+protocol+".socketFactory.class","javax.net.ssl.SSLSocketFactory");
-        props.setProperty("mail."+protocol+".socketFactory.fallback","true");
-        props.setProperty("mail."+protocol+".socketFactory.port","993");
+        props.setProperty("mail." + protocol + ".socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail." + protocol + ".socketFactory.fallback", "true");
+        props.setProperty("mail." + protocol + ".socketFactory.port", "993");
 
         // 获取连接
         Session session = Session.getDefaultInstance(props);
@@ -43,22 +41,26 @@ public class MailUtils {
         Message[] messages = folder.getMessages();// 得到邮箱帐户中的所有邮件
 
         for (Message message : messages) {
+            if (message.isSet(Flags.Flag.SEEN)) {
+                continue;
+            }
             String subject = message.getSubject();// 获得邮件主题
             Address from = (Address) message.getFrom()[0];// 获得发送者地址
-            System.out.println("邮件的主题为: " + subject + "\t发件人地址为: " + from);
+//            String content = message.getContent().toString();
+            System.out.println("邮件的主题为: " + subject + "\t发件人地址为: " + from.toString() + "\tcontent:");
 //            System.out.println("邮件的内容为：");
 //            message.writeTo(System.out);// 输出邮件内容到控制台
-
-            if(message.isMimeType("multipart/mixed") && subject.equals("EM9A1245")){
+            message.setFlag(Flags.Flag.SEEN, true);
+            if (message.isMimeType("multipart/mixed") && subject.equals("EM9A1245")) {
                 //存在附件
-                Multipart mp=(Multipart) message.getContent();
-                File targetfile=new File("D:\\doc\\test.jpg");
-                FileOutputStream os=new FileOutputStream(targetfile,true);
+                Multipart mp = (Multipart) message.getContent();
+                File targetfile = new File("D:\\doc\\test.jpg");
+                FileOutputStream os = new FileOutputStream(targetfile, true);
                 message.writeTo(os);
-                int length=mp.getCount();
-                for(int i=0;i<length;i++){
-                    BodyPart bodyPart=mp.getBodyPart(i);
-                    System.out.println("name:"+bodyPart.getFileName()+"\tsize:"+bodyPart.getSize());
+                int length = mp.getCount();
+                for (int i = 0; i < length; i++) {
+                    BodyPart bodyPart = mp.getBodyPart(i);
+                    System.out.println("name:" + bodyPart.getFileName() + "\tsize:" + bodyPart.getSize());
                 }
             }
         }
