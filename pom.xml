@@ -19,5 +19,6 @@
 		<module>mm-job</module>
 		<module>mm-config</module>
         <module>mm-eureka</module>
+		<module>mm-test</module>
 	</modules>
 </project>
