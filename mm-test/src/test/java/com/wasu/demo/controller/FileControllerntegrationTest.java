@@ -1,7 +1,9 @@
 package com.wasu.demo.controller;
 
 import com.wasu.springboot.integration.TestApplication;
+import com.wasu.springboot.integration.controller.Filecontroller;
 import com.wasu.springboot.integration.service.FileService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -10,7 +12,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.annotation.Resource;
 
@@ -24,11 +28,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class FileControllerntegrationTest {
 
-    @Resource
     private MockMvc mockMvc;
 
     @MockBean
     private FileService fileService;
+
+    @Before
+    public void setUp() throws  Exception{
+        mockMvc = MockMvcBuilders.standaloneSetup(new Filecontroller()).build();
+    }
 
     @Test
     public void errorqueryByName() throws Exception{
@@ -36,7 +44,7 @@ public class FileControllerntegrationTest {
 
         this.mockMvc.perform(get("/queryByName").accept(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(-1))
+                .andExpect(jsonPath("$.code").value(1))
                 .andDo(MockMvcResultHandlers.print());
     }
 }
