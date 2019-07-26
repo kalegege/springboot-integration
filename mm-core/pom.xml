@@ -125,6 +125,11 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.5.4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

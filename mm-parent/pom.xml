@@ -23,6 +23,7 @@
 		<spring-retry.version>1.2.1.RELEASE</spring-retry.version>
 		<shiro.version>1.2.6</shiro.version>
 		<mysql.version>5.1.6</mysql.version>
+		<pinyin.version>2.5.1</pinyin.version>
 		<druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
 		<spring-cloud-starter-netflix-eureka-client.version>1.4.7.RELEASE</spring-cloud-starter-netflix-eureka-client.version>
 	</properties>
@@ -198,6 +199,12 @@
 				<groupId>de.codecentric</groupId>
 				<artifactId>spring-boot-admin-starter-client</artifactId>
 				<version>1.5.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.belerweb</groupId>
+				<artifactId>pinyin4j</artifactId>
+				<version>${pinyin.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
