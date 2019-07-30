@@ -198,7 +198,7 @@ public class DESEncryptForYpt
 
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			Date afterDate = new Date(now .getTime() + 3600000000000L);
+			Date afterDate = new Date(now .getTime() - 3600L);
 
 			String jumpurl = "/main.html#/officehall";
 			String codeString= "浙政钉;" + Username + ";" + (ShowName == null ? "" : ShowName.replace(";", "；"))
