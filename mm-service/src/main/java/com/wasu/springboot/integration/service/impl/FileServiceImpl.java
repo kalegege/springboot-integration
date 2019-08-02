@@ -2,6 +2,7 @@ package com.wasu.springboot.integration.service.impl;
 
 import com.wasu.springboot.integration.constants.CommonConstant;
 import com.wasu.springboot.integration.dao.FileDao;
+import com.wasu.springboot.integration.entity.Task.TaskDO;
 import com.wasu.springboot.integration.entity.file.FileEntity;
 import com.wasu.springboot.integration.service.FileService;
 import org.apache.commons.collections.CollectionUtils;
@@ -15,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Service("fileService")
-public class FileServiceImpl implements FileService {
+public class FileServiceImpl extends ActivitiServiceImpl implements FileService {
     private static final Logger LOGGER= LoggerFactory.getLogger(FileServiceImpl.class);
 
     @Autowired
@@ -90,5 +91,13 @@ public class FileServiceImpl implements FileService {
         if(null != tempFile){
             fileDao.deleteById(file.getId());
         }
+        this.doComplete();
     }
+
+    @Override
+    public void beforeComplete() {
+        LOGGER.info("before do complete FileServiceImpl");
+    }
+
+
 }
