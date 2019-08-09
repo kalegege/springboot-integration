@@ -1,6 +1,7 @@
 package com.wasu.springboot.integration.common.shiro;
 
 import com.wasu.springboot.integration.common.config.DynamicConfig;
+import com.wasu.springboot.integration.redis.RedisUtil;
 import com.wasu.springboot.integration.utils.CacheUtil;
 import com.wasu.springboot.integration.utils.SerializeUtils;
 import com.wasu.springboot.integration.utils.StringUtils;
@@ -24,7 +25,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
     private  static final int SESSION_TIME=46800;
 
     @Autowired
-    private CacheUtil cacheUtil;
+    private RedisUtil cacheUtil;
 
     @Autowired
     private DynamicConfig dynamicConfig;
@@ -91,7 +92,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
             return;
         }
         String key =getShiroKey(session.getId());
-        cacheUtil.remove(key);
+        cacheUtil.removeKey(key);
     }
 
     @Override

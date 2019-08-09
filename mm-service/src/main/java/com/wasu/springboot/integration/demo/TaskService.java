@@ -22,4 +22,14 @@ public interface TaskService {
      * 接收邮件
      */
     void receiveMail();
+
+    /**
+     * 计算 123456789 = 100
+     */
+    void calculate_100();
+
+    /**
+     * 获取指定页面
+     */
+    void getPage();
 }

@@ -36,12 +36,12 @@ public class AddCommonAttributeFilter extends OncePerRequestFilter {
             return;
         }
         Map<String,Object> extraParams=new HashMap<>();
-        ActiveUser activeUser=(ActiveUser)((HttpServletRequest)request).getSession().getAttribute(CommonConstant.USER_INFO_SESSION);
-        if(activeUser != null){
-            extraParams.put("creater",activeUser.getUserid());
-            extraParams.put("updater",activeUser.getUserid());
-            extraParams.put("orgId",activeUser.getOrgId());
-        }
+//        ActiveUser activeUser=(ActiveUser)((HttpServletRequest)request).getSession().getAttribute(CommonConstant.USER_INFO_SESSION);
+//        if(activeUser != null){
+//            extraParams.put("creater",activeUser.getUserid());
+//            extraParams.put("updater",activeUser.getUserid());
+//            extraParams.put("orgId",activeUser.getOrgId());
+//        }
         RequestParameterWrapper requestParameterWrapper=new RequestParameterWrapper((HttpServletRequest)request);
         requestParameterWrapper.addParameters(extraParams);
         chain.doFilter(requestParameterWrapper,response);

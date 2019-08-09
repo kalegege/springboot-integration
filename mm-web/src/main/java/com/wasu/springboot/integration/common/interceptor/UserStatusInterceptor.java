@@ -43,52 +43,52 @@ public class UserStatusInterceptor extends HandlerInterceptorAdapter {
         Method handlerMethod=((HandlerMethod)handler).getMethod();
         Annotation anno=handlerMethod.getAnnotation(ResponseBody.class);
         try{
-            AbstractHandlerMethodMapping<RequestMappingInfo> mapping=(AbstractHandlerMethodMapping<RequestMappingInfo>)applicationContext.getBean("requestMappingHandlerMapping");
-            Map<RequestMappingInfo,HandlerMethod> mapRet = mapping.getHandlerMethods();
-
-            boolean flag=false;
-            for(RequestMappingInfo mappingInfo: mapRet.keySet()){
-                RequestMappingInfo info=mappingInfo.getMatchingCondition(request);
-                if(info != null){
-                    flag=true;
-                    break;
-                }
-            }
-            if(flag){
-                HttpSession session =request.getSession();
-                //todo
-                ActiveUser activeUser=(ActiveUser) session.getAttribute(CommonConstant.USER_INFO_SESSION);
-                if(null == activeUser){
-                    response.sendRedirect("/logout");
-                    return false;
-                }
-                if(anno == null){
-                    if(activeUser.isFlag()){
-                        activeUser.setFlag(false);
-                        ShiroUtils.setAttribute(CommonConstant.USER_INFO_SESSION,activeUser);
-                        response.sendRedirect("/logout");
-                        return false;
-                    }
-                }else{
-                    if(activeUser.isFlag()){
-                        JsonResult jsonResult=new JsonResult();
-                        jsonResult.setCode(-9999);
-                        writeToResponse(request,response,jsonResult);
-                        return false;
-                    }
-                }
-
-                if(anno == null){
-                    cacheUtil.setMap(CommonConstant.LOGINSTATETYPE+activeUser.getOrgId(),activeUser.getUserid().toString(),
-                            DateUtils.formatDateTime(DateUtils.getNow(),DateUtils.DATE_TIME_FORMAT));
-                }else{
-                    String requestURI=request.getRequestURI();
-                    if(!requestURI.endsWith("/error")){
-                        cacheUtil.setMap(CommonConstant.LOGINSTATETYPE+activeUser.getOrgId(),activeUser.getUserid().toString(),
-                                DateUtils.formatDateTime(DateUtils.getNow(),DateUtils.DATE_TIME_FORMAT));
-                    }
-                }
-            }
+//            AbstractHandlerMethodMapping<RequestMappingInfo> mapping=(AbstractHandlerMethodMapping<RequestMappingInfo>)applicationContext.getBean("requestMappingHandlerMapping");
+//            Map<RequestMappingInfo,HandlerMethod> mapRet = mapping.getHandlerMethods();
+//
+//            boolean flag=false;
+//            for(RequestMappingInfo mappingInfo: mapRet.keySet()){
+//                RequestMappingInfo info=mappingInfo.getMatchingCondition(request);
+//                if(info != null){
+//                    flag=true;
+//                    break;
+//                }
+//            }
+//            if(flag){
+//                HttpSession session =request.getSession();
+//                //todo
+//                ActiveUser activeUser=(ActiveUser) session.getAttribute(CommonConstant.USER_INFO_SESSION);
+//                if(null == activeUser){
+//                    response.sendRedirect("/logout");
+//                    return false;
+//                }
+//                if(anno == null){
+//                    if(activeUser.isFlag()){
+//                        activeUser.setFlag(false);
+//                        ShiroUtils.setAttribute(CommonConstant.USER_INFO_SESSION,activeUser);
+//                        response.sendRedirect("/logout");
+//                        return false;
+//                    }
+//                }else{
+//                    if(activeUser.isFlag()){
+//                        JsonResult jsonResult=new JsonResult();
+//                        jsonResult.setCode(-9999);
+//                        writeToResponse(request,response,jsonResult);
+//                        return false;
+//                    }
+//                }
+//
+//                if(anno == null){
+//                    cacheUtil.setMap(CommonConstant.LOGINSTATETYPE+activeUser.getOrgId(),activeUser.getUserid().toString(),
+//                            DateUtils.formatDateTime(DateUtils.getNow(),DateUtils.DATE_TIME_FORMAT));
+//                }else{
+//                    String requestURI=request.getRequestURI();
+//                    if(!requestURI.endsWith("/error")){
+//                        cacheUtil.setMap(CommonConstant.LOGINSTATETYPE+activeUser.getOrgId(),activeUser.getUserid().toString(),
+//                                DateUtils.formatDateTime(DateUtils.getNow(),DateUtils.DATE_TIME_FORMAT));
+//                    }
+//                }
+//            }
             return super.preHandle(request, response, handler);
         }catch(Exception e){
             LOGGER.info(e.getMessage(),e);

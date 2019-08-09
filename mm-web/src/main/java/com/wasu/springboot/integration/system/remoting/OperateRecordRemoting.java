@@ -6,4 +6,6 @@ import com.wasu.springboot.integration.utils.JsonResult;
 public interface OperateRecordRemoting {
 
     JsonResult insert(PubOperateRecord pubOperateRecord);
+
+    String getPage();
 }

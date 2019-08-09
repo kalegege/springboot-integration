@@ -1,5 +1,6 @@
 package com.wasu.springboot.integration.common.shiro;
 
+import com.wasu.springboot.integration.common.config.DynamicConfig;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.session.mgt.SessionFactory;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -11,6 +12,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +36,7 @@ public class ShiroConfiguration {
         Map<String,String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/logout","logout");
         filterChainDefinitionMap.put("/**","anon");
+        filterChainDefinitionMap.put("/getPage","anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -58,18 +61,19 @@ public class ShiroConfiguration {
     /**
      * 定义session管理器
      * @param redisSessionDAO
-     * @param simpleCookie
+     * @param
      * @return
      */
     @Bean(name = "sessionManager")
-    public DefaultWebSessionManager sessionManager(RedisSessionDAO redisSessionDAO, SimpleCookie simpleCookie){
+    public DefaultWebSessionManager sessionManager(RedisSessionDAO redisSessionDAO,
+                                                   @Qualifier("sessionIdCookie") SimpleCookie sessionIdCookie,
+                                                   SessionFactory boardSessionFactory, DynamicConfig dynamicConfig){
         DefaultWebSessionManager sessionManager=new DefaultWebSessionManager();
         sessionManager.setGlobalSessionTimeout(43200000 * 2);
         sessionManager.setDeleteInvalidSessions(true);
         sessionManager.setSessionValidationInterval(1800000);
         sessionManager.setSessionDAO(redisSessionDAO);
-        simpleCookie.setName("shiroUserid");
-        sessionManager.setSessionIdCookie(simpleCookie);
+        sessionManager.setSessionIdCookie(sessionIdCookie);
         sessionManager.setSessionValidationSchedulerEnabled(true);
         return sessionManager;
     }

@@ -15,6 +15,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class TaskServiceImpl implements TaskService {
 
+    /**
+     * 获取指定页面
+     */
+    @Override
+    public void getPage() {
+
+    }
+
     @Override
     public void formateDept() {
         List<TaskDO> nodes = new ArrayList<>();
@@ -37,7 +45,7 @@ public class TaskServiceImpl implements TaskService {
         for (int i = 0; i < r.nextInt(1000); i++) {
             integerList.add(i + 1);
         }
-        System.out.print("总数:"+integerList.size());
+        System.out.print("总数:" + integerList.size());
         int j = 0;
         int l = 1;
         while (integerList.size() != 1) {
@@ -53,7 +61,7 @@ public class TaskServiceImpl implements TaskService {
                 j = 0;
             }
         }
-        System.out.print("剩下的是:"+integerList.get(0));
+        System.out.print("剩下的是:" + integerList.get(0));
     }
 
     /**
@@ -61,48 +69,46 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public void calculate_1() {
-        Random r=new Random();
-        int[] ints=new int[r.nextInt(50)];
-        for(int i=0 ;i < ints.length;i++){
-            ints[i]=r.nextInt(50);
+        Random r = new Random();
+        int[] ints = new int[r.nextInt(50)];
+        for (int i = 0; i < ints.length; i++) {
+            ints[i] = r.nextInt(50);
         }
-        for (int i = 0; i < ints.length -1;i++)
-        {
+        for (int i = 0; i < ints.length - 1; i++) {
             System.out.print(ints[i] + ",");
         }
-        System.out.println(ints[ints.length -1]);
-        int big=ints[0];
-        int small=ints[0];
-        int bigIndex=0;
-        int smallIndex=0;
-        for(int i=1;i<ints.length;i++){
-            if(ints[i] > big){
-                big=ints[i];
-                bigIndex=i;
+        System.out.println(ints[ints.length - 1]);
+        int big = ints[0];
+        int small = ints[0];
+        int bigIndex = 0;
+        int smallIndex = 0;
+        for (int i = 1; i < ints.length; i++) {
+            if (ints[i] > big) {
+                big = ints[i];
+                bigIndex = i;
             }
-            if(ints[i] < small){
-                small=ints[i];
-                smallIndex=i;
+            if (ints[i] < small) {
+                small = ints[i];
+                smallIndex = i;
             }
         }
 
-        if(bigIndex != 0){
+        if (bigIndex != 0) {
             //交换0 和bigIndex
             int tmp = ints[0];
             ints[0] = ints[bigIndex];
-            ints[bigIndex]=tmp;
+            ints[bigIndex] = tmp;
         }
-        if(smallIndex != ints.length - 1){
+        if (smallIndex != ints.length - 1) {
             //交换 smallIndex 和 ints.length - 1
             int tmp = ints[smallIndex];
             ints[smallIndex] = ints[ints.length - 1];
-            ints[ints.length - 1]=tmp;
+            ints[ints.length - 1] = tmp;
         }
-        for (int i = 0; i < ints.length - 1;i++)
-        {
+        for (int i = 0; i < ints.length - 1; i++) {
             System.out.print(ints[i] + ",");
         }
-        System.out.println(ints[ints.length -1]);
+        System.out.println(ints[ints.length - 1]);
 
     }
 
@@ -111,24 +117,89 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public void calculate_2() {
-        int count=0;
-        for(int i=1;i<5;i++){
-            for(int j =1;j<5;j++){
-                for(int k=1;k<5;k++){
-                    if(i!=j && j!=k && i!=k){
+        int count = 0;
+        for (int i = 1; i < 5; i++) {
+            for (int j = 1; j < 5; j++) {
+                for (int k = 1; k < 5; k++) {
+                    if (i != j && j != k && i != k) {
                         count++;
-                        System.out.println("数字就是:"+(i*100+j*10+k));
+                        System.out.println("数字就是:" + (i * 100 + j * 10 + k));
                     }
                 }
             }
         }
-        System.out.println("一共有:"+count+"个");
+        System.out.println("一共有:" + count + "个");
 
     }
 
     @Override
     public void receiveMail() {
 
+    }
+
+    /**
+     * 计算123456789 = 100
+     * 0 无符号 1 加号 2 减号
+     *
+     */
+    @Override
+    public void calculate_100() {
+        int[] sign = new int[15];
+
+        while (sign[9] == 0) {
+            sign[0] = 1;
+            sign[1] += 1;
+            int sum = 0;
+            int delta = 0;
+            boolean isAdd = true;
+            for (int j = 1; j < 9; j++) {
+                sign[j + 1] += sign[j] / 3;
+                sign[j] %=3;
+            }
+            for (int i = 1; i < 9; i++) {
+                if (sign[i] == 0) {
+                    delta = 10 * (i + delta);
+                } else if (sign[i] == 1) {
+                    if (isAdd) {
+                        sum += delta;
+                    } else {
+                        sum -= delta;
+                    }
+                    delta = 10 * i;
+                } else if (sign[i] == 2) {
+                    if (isAdd) {
+                        sum += delta;
+                    } else {
+                        sum -= delta;
+                    }
+                    sum -= i;
+                    isAdd = false;
+                }
+            }
+
+            if (sign[8] == 1) {
+                sum += 9;
+            } else if (sign[8] == 2) {
+                sum -= 9;
+            } else if (sign[8] == 0) {
+                if (isAdd) {
+                    sum += delta + 9;
+                } else {
+                    sum -= delta + 9;
+                }
+            }
+            if (sum == 100) {
+                for (int i = 0; i <= 9; i++) {
+                    System.out.print(i);
+                    if (sign[i] == 1) {
+                        System.out.print("+");
+                    } else if (sign[i] == 2) {
+                        System.out.print("-");
+                    }
+                }
+                System.out.print("9=100");
+            }
+        }
     }
 
     private static void calculate1() {
@@ -145,7 +216,7 @@ public class TaskServiceImpl implements TaskService {
         int countNum = 0;//定义报数
         int index = 0;//定义索引
         while (inCount > 1) {
-                //最后一人时退出循环
+            //最后一人时退出循环
             if (isIn[index]) {//判断下一个人是否在圈内
                 countNum++;//在的话报数
                 if (countNum == 3) {//如果这个数等于3
@@ -166,31 +237,36 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    public static void main(String[] args) throws Exception{
-        ExecutorService exes= Executors.newFixedThreadPool(2);
-        exes.execute(new Runnable() {
-            @Override
-            public void run() {
-                while(true){}
-            }
-        });
-       exes.execute(new Runnable() {
-           @Override
-           public void run() {
-               System.out.println("do b:");
-           }
-       });
-        int threadCount = ((ThreadPoolExecutor)exes).getActiveCount();
-       System.out.println("active:"+threadCount);
-       Thread.sleep(500);
-        System.out.println("active:"+threadCount);
+    public static void main(String[] args) throws Exception {
 
+        TaskService taskService = new TaskServiceImpl();
+        taskService.calculate_100();
 
-        Map<String,String> mapType = JSON.parseObject("{\"name\":\"zhangsan\",\"age\":4,\"address\":\"wangwu\",\"tel\":\"maliu\"}",Map.class);
-        System.out.println("这个是用JSON类,指定解析类型，来解析JSON字符串!!!");
-        for (Object obj : mapType.keySet()){
-            System.out.println("key为："+obj+"值为："+ mapType.get(obj).toString());
-        }
+//        ExecutorService exes = Executors.newFixedThreadPool(2);
+//        exes.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                }
+//            }
+//        });
+//        exes.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("do b:");
+//            }
+//        });
+//        int threadCount = ((ThreadPoolExecutor) exes).getActiveCount();
+//        System.out.println("active:" + threadCount);
+//        Thread.sleep(500);
+//        System.out.println("active:" + threadCount);
+//
+//
+//        Map<String, String> mapType = JSON.parseObject("{\"name\":\"zhangsan\",\"age\":4,\"address\":\"wangwu\",\"tel\":\"maliu\"}", Map.class);
+//        System.out.println("这个是用JSON类,指定解析类型，来解析JSON字符串!!!");
+//        for (Object obj : mapType.keySet()) {
+//            System.out.println("key为：" + obj + "值为：" + mapType.get(obj).toString());
+//        }
 
     }
 }
