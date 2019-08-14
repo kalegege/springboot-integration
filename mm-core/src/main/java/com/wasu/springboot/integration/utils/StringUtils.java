@@ -383,4 +383,101 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return matcher.matches();
     }
 
+    /**
+     * 去掉以某个class为name 的节点
+     *
+     * @param html
+     * @param className
+     * @return
+     */
+    public static String hideByClass(String html, String className) {
+        return html.replaceAll("class=\"" + className + "\"", "class=\"" + className + "\" style=\"display:none;\"");
+    }
+
+    /**
+     * 去掉以某个id为name 的节点
+     *
+     * @param html
+     * @param idName
+     * @return
+     */
+    public static String hideById(String html, String idName) {
+        return html.replace("id=\"" + idName + "\"", "id=\""+idName+"\" style=\"display:none;\"");
+    }
+
+    /**
+     * 去掉以某个class为name 的节点
+     *
+     * @param html
+     * @param hrefUrl
+     * @return
+     */
+    public static String hideByHref(String html, String hrefUrl) {
+        return html.replace("href=\"" + hrefUrl + "\"", "href=\"" + hrefUrl + "\" style=\"display:none;\"");
+    }
+
+    /**
+     * 传入需要去除的classlist
+     *
+     * @param html
+     * @param classNameList
+     * @return
+     */
+    public static String hideByClass(String html, List<String> classNameList) {
+        String result = html;
+        if (CollectionUtils.isNotEmpty(classNameList)) {
+            for (int i = 0; i < classNameList.size(); i++) {
+                result = hideByClass(result, classNameList.get(i));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 传入需要去除的classlist
+     *
+     * @param html
+     * @param hrefList
+     * @return
+     */
+    public static String hideByHref(String html, List<String> hrefList) {
+        String result = html;
+        if (CollectionUtils.isNotEmpty(hrefList)) {
+            for (int i = 0; i < hrefList.size(); i++) {
+                result = hideByHref(result, hrefList.get(i));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 根据名字修改href的值
+     *
+     * @param html
+     * @param name
+     * @return
+     */
+    public static String changeHrefByNameAndUrl(String html, String name, String url, String newUrl) {
+        return html.replace("<a href=\"" + url + "\" target=\"_blank\">" + name + "</a>",
+                "<a href=\"" + newUrl + "\" target=\"_blank\">" + name + "</a>");
+    }
+
+    /**
+     * 根据id隐藏
+     *
+     * @param html
+     * @param ids
+     * @return
+     * @author 王越
+     * @date 2019/8/12 9:33
+     */
+    public static String hideById(String html, List<String> ids) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return html;
+        }
+        for (String id : ids) {
+            html = StringUtils.hideById(html, id);
+        }
+        return html;
+    }
 }

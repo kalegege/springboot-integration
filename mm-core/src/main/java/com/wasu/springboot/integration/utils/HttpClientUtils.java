@@ -3,12 +3,15 @@ package com.wasu.springboot.integration.utils;
 import com.wasu.springboot.integration.exceptions.BaseCoreException;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContextBuilder;
 import org.apache.http.conn.ssl.TrustStrategy;
@@ -28,6 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.security.KeyStore;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -390,5 +394,91 @@ public class HttpClientUtils {
             close(httpClient,response);
         }
         return null;
+    }
+
+    /**
+     * 获取页面内容
+     *
+     * @param url
+     * @param charset
+     * @return
+     * @author 王越
+     * @date 10:54
+     */
+    public static String getPage(String url, String charset) {
+        String pageData = null;
+        //1.生成httpclient，相当于该打开一个浏览器
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response = null;
+        //2.创建get请求，相当于在浏览器地址栏输入 网址
+        HttpGet request = new HttpGet(url);
+        try {
+            //3.执行get请求，相当于在输入地址栏后敲回车键
+            response = httpClient.execute(request);
+
+            //4.判断响应状态为200，进行处理
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                //5.获取响应内容
+                HttpEntity httpEntity = response.getEntity();
+                String html = EntityUtils.toString(httpEntity, charset);
+                pageData = html;
+            } else {
+                //如果返回状态不是200，比如404（页面不存在）等，根据情况做处理，这里略
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //6.关闭
+            org.apache.http.client.utils.HttpClientUtils.closeQuietly(response);
+            org.apache.http.client.utils.HttpClientUtils.closeQuietly(httpClient);
+        }
+        return pageData;
+    }
+
+    /**
+     * 默认按照gbk编码进行解析
+     * @param targetUrl
+     * @return
+     */
+    public static String getPage(String targetUrl){
+        return getPage(targetUrl,"gbk");
+    }
+
+    public static String doGet(String url, Map<String, String> param) {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        String resultString = "";
+        CloseableHttpResponse response = null;
+        try {
+            URIBuilder builder = new URIBuilder(url);
+            if (param != null) {
+                for (String key : param.keySet()) {
+                    builder.addParameter(key, param.get(key));
+                }
+            }
+            URI uri = builder.build();
+            HttpGet httpGet = new HttpGet(uri);
+            response = httpclient.execute(httpGet);
+            if (response.getStatusLine().getStatusCode() == 200) {
+                resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (response != null) {
+                    response.close();
+                }
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return decodeUnicode(resultString);
+    }
+
+    public static String doGet(String url) {
+        return doGet(url, null);
     }
 }
