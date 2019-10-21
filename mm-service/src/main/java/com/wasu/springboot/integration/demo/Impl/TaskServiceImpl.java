@@ -23,6 +23,99 @@ public class TaskServiceImpl implements TaskService {
 
     }
 
+    /**
+     * 画图
+     */
+    @Override
+    public void  drawPicture() {
+        Scanner s = new Scanner(System.in);
+        int N = s.nextInt();
+        int[][] pos = new int[101][101];
+
+        int x1=0, x2=0, y1=0, y2=0, temp=0;
+        int i, j, k, counter=0;
+
+        for(i=0;i<N;i++){
+            x1=s.nextInt();
+            y1=s.nextInt();
+            x2=s.nextInt();
+            y2=s.nextInt();
+
+            if(x1 > x2){
+                temp = x1;
+                x1=x2;
+                x2=temp;
+            }
+            if(y1 > y2){
+                temp = y1;
+                y1=y2;
+                y2=temp;
+            }
+
+            for(j =y1;j<y2;j++){
+                for(k=x1;k<x2;k++){
+                    if(pos[k][j] != 1){
+                        pos[k][j] = 1;
+                        counter++;
+                    }
+                }
+            }
+        }
+        System.out.printf("%d",counter);
+    }
+
+    /**
+     * 买票系统
+     */
+    @Override
+    public void  buyTicket() {
+        Scanner s = new Scanner(System.in);
+        int N = s.nextInt();
+        int count[] = new int[100];
+
+        for(int i=0;i<N;i++){
+            count[i] = s.nextInt();
+        }
+
+        int zw[][]=new int[20][6];
+        for(int i=0;i<zw.length;i++){
+            zw[i][5]=5;
+        }
+
+        for(int i=0;i<N;i++){
+            int temp=count[i];
+            boolean flag = false;
+            for(int j=0;j<zw.length;j++){
+                int res= zw[j][5];
+                if(res >= temp){
+                    int start = 5 - res;
+                    zw[j][5] -= temp;
+                    flag = true;
+                    for(int k=start ;k<start + temp; k++){
+                        System.out.print(j*5+k+1+" ");
+                    }
+                    System.out.println();
+                    break;
+                }
+            }
+            if(!flag){
+                for(int j=0;j<zw.length;j++){
+                    int res=zw[j][5];
+                    if(res > 0){
+                        System.out.println(j*5+5-res+1+" ");
+                        zw[j][5-res] = 1;
+                        zw[j][5] -=temp;
+                        temp--;
+                    }
+                    if(temp == 0){
+                        break;
+                    }
+                }
+                System.out.println();
+            }
+        }
+    }
+
     @Override
     public void formateDept() {
         List<TaskDO> nodes = new ArrayList<>();
@@ -240,7 +333,7 @@ public class TaskServiceImpl implements TaskService {
     public static void main(String[] args) throws Exception {
 
         TaskService taskService = new TaskServiceImpl();
-        taskService.calculate_100();
+        taskService.buyTicket();
 
 //        ExecutorService exes = Executors.newFixedThreadPool(2);
 //        exes.execute(new Runnable() {

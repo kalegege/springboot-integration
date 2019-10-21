@@ -32,4 +32,14 @@ public interface TaskService {
      * 获取指定页面
      */
     void getPage();
+
+    /**
+     * 画图
+     */
+    void drawPicture();
+
+    /**
+     *  买票系统
+     */
+    void  buyTicket();
 }
