@@ -9,11 +9,12 @@ CREATE TABLE sys_file_info (
     `fileGroup`             VARCHAR(128)      NOT NULL                                    COMMENT '文件存储组',
     `fileSize`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '文件大小',
 
-    `create_time`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '创建时间',
-    `creator`               VARCHAR(64)       NOT NULL                                    COMMENT '创建者',
-    `update_time`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '更新时间',
-    `updater`               VARCHAR(64)       NOT NULL                                    COMMENT '更新者',
-    `deleted`               TINYINT UNSIGNED  NOT NULL DEFAULT 0                          COMMENT '是否逻辑删除',
+    `ctime`                 TIMESTAMP         NOT NULL                                    COMMENT '创建时间',
+    `mtime`                 TIMESTAMP         NOT NULL                                    COMMENT '修改时间',
+    `rtime`                 TIMESTAMP         NOT NULL                                    COMMENT '系统调整时间',
+    `isvalid`               INT UNSIGNED      NOT NULL                                    COMMENT '是否游侠',
+    `creater`               BIGINT UNSIGNED   NOT NULL                                    COMMENT '创建人ID',
+    `updater`               BIGINT UNSIGNED   NOT NULL                                    COMMENT '更新者ID',
     `remark`                VARCHAR(1024)     NOT NULL DEFAULT ''                         COMMENT '备注，DBA操作使用',
 
     PRIMARY KEY (`id`)
