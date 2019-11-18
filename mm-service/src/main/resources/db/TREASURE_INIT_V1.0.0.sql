@@ -2,13 +2,13 @@ CREATE DATABASE mm;
 USE mm;
 
 CREATE TABLE sys_file_info (
-    `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
     `fileName`              VARCHAR(64)       NOT NULL                                    COMMENT '文件名称',
     `file_type`             INT UNSIGNED      NOT NULL                                    COMMENT '文件类型',
     `filePath`              VARCHAR(128)      NOT NULL                                    COMMENT '文件路径',
     `fileGroup`             VARCHAR(128)      NOT NULL                                    COMMENT '文件存储组',
     `fileSize`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '文件大小',
 
+    `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
     `ctime`                 TIMESTAMP         NOT NULL                                    COMMENT '创建时间',
     `mtime`                 TIMESTAMP         NOT NULL                                    COMMENT '修改时间',
     `rtime`                 TIMESTAMP         NOT NULL                                    COMMENT '系统调整时间',
@@ -22,26 +22,47 @@ CREATE TABLE sys_file_info (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件表';
 
 
-CREATE TABLE t_treasure_domain (
-    `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
-    `name`                  VARCHAR(64)       NOT NULL                                    COMMENT '名称',
-    `description`           VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
-    `type`                  VARCHAR(64)       NOT NULL                                    COMMENT '类型',
-    `key`                   VARCHAR(64)       NOT NULL                                    COMMENT '键名',
-    `entrance_id`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '所属入口',
+CREATE TABLE wb_report (
+    `reportType`            VARCHAR(64)       NOT NULL                                    COMMENT '名称',
+    `reportTypeName`        VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
+    `reportCode`            VARCHAR(64)       NOT NULL                                    COMMENT '类型',
+    `reportName`            VARCHAR(64)       NOT NULL                                    COMMENT '键名',
+    `grade`                 VARCHAR(64)       NOT NULL                                    COMMENT '所属入口',
+    `wbReportGradeId`       BIGINT UNSIGNED   NOT NULL                                    COMMENT '名称',
+    `reportTitle`           VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
+    `reportDesc`            VARCHAR(64)       NOT NULL                                    COMMENT '类型',
+    `reportKeyword`         VARCHAR(64)       NOT NULL                                    COMMENT '键名',
+    `relaReportId`          BIGINT UNSIGNED   NOT NULL                                    COMMENT '所属入口',
+    `importUser`            BIGINT UNSIGNED   NOT NULL                                    COMMENT '名称',
+    `userName`              VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
+    `mechanism`             VARCHAR(64)       NOT NULL                                    COMMENT '类型',
+    `author`                VARCHAR(64)       NOT NULL                                    COMMENT '键名',
+    `industry`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '所属入口',
+    `indeustryName`         VARCHAR(64)       NOT NULL                                    COMMENT '名称',
+    `isPositive`            TINYINT UNSIGNED  NOT NULL DEFAULT ''                         COMMENT '描述',
+    `startTime`             TIMESTAMP         NOT NULL                                    COMMENT '类型',
+    `endTime`               TIMESTAMP         NOT NULL                                    COMMENT '键名',
+    `order`                 VARCHAR(128)      NOT NULL                                    COMMENT '所属入口',
+    `realReportName`        VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
+    `filePath`              VARCHAR(64)       NOT NULL                                    COMMENT '类型',
+    `reportSource`          INT UNSIGNED      NOT NULL                                    COMMENT '键名',
+    `reportUrl`             VARCHAR(64)       NOT NULL                                    COMMENT '所属入口',
+    `originalIndustry`      VARCHAR(64)       NOT NULL                                    COMMENT '名称',
 
-    `create_time`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '创建时间',
-    `creator`               VARCHAR(64)       NOT NULL                                    COMMENT '创建者',
-    `update_time`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '更新时间',
-    `updater`               VARCHAR(64)       NOT NULL                                    COMMENT '更新者',
-    `deleted`               TINYINT UNSIGNED  NOT NULL DEFAULT 0                          COMMENT '是否逻辑删除',
+    `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
+    `ctime`                 TIMESTAMP         NOT NULL                                    COMMENT '创建时间',
+    `mtime`                 TIMESTAMP         NOT NULL                                    COMMENT '修改时间',
+    `rtime`                 TIMESTAMP         NOT NULL                                    COMMENT '系统调整时间',
+    `isvalid`               INT UNSIGNED      NOT NULL                                    COMMENT '是否游侠',
+    `creater`               BIGINT UNSIGNED   NOT NULL                                    COMMENT '创建人ID',
+    `updater`               BIGINT UNSIGNED   NOT NULL                                    COMMENT '更新者ID',
     `remark`                VARCHAR(1024)     NOT NULL DEFAULT ''                         COMMENT '备注，DBA操作使用',
 
     PRIMARY KEY (`id`),
     UNIQUE  KEY `name` (`name`),
     INDEX       `type` (`type`) USING BTREE
 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='领域表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='外部报告表';
 
 
 CREATE TABLE t_treasure_role (
