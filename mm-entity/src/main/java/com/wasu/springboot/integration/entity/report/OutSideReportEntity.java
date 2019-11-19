@@ -86,7 +86,7 @@ public class OutSideReportEntity extends BaseEntity{
     /**
      * 行业名称
      */
-    private String indeustryName;
+    private String industryName;
 
     /**
      * 是否正序排列 true-正序 false-倒序

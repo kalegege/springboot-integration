@@ -2,11 +2,11 @@ CREATE DATABASE mm;
 USE mm;
 
 CREATE TABLE sys_file_info (
-    `fileName`              VARCHAR(64)       NOT NULL                                    COMMENT '文件名称',
+    `file_name`              VARCHAR(64)       NOT NULL                                    COMMENT '文件名称',
     `file_type`             INT UNSIGNED      NOT NULL                                    COMMENT '文件类型',
-    `filePath`              VARCHAR(128)      NOT NULL                                    COMMENT '文件路径',
-    `fileGroup`             VARCHAR(128)      NOT NULL                                    COMMENT '文件存储组',
-    `fileSize`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '文件大小',
+    `file_path`              VARCHAR(128)      NOT NULL                                    COMMENT '文件路径',
+    `file_group`             VARCHAR(128)      NOT NULL                                    COMMENT '文件存储组',
+    `file_size`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '文件大小',
 
     `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
     `ctime`                 TIMESTAMP         NOT NULL                                    COMMENT '创建时间',
@@ -23,31 +23,31 @@ CREATE TABLE sys_file_info (
 
 
 CREATE TABLE wb_report (
-    `reportType`            VARCHAR(64)       NOT NULL                                    COMMENT '名称',
-    `reportTypeName`        VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
-    `reportCode`            VARCHAR(64)       NOT NULL                                    COMMENT '类型',
-    `reportName`            VARCHAR(64)       NOT NULL                                    COMMENT '键名',
-    `grade`                 VARCHAR(64)       NOT NULL                                    COMMENT '所属入口',
-    `wbReportGradeId`       BIGINT UNSIGNED   NOT NULL                                    COMMENT '名称',
-    `reportTitle`           VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
-    `reportDesc`            VARCHAR(64)       NOT NULL                                    COMMENT '类型',
-    `reportKeyword`         VARCHAR(64)       NOT NULL                                    COMMENT '键名',
-    `relaReportId`          BIGINT UNSIGNED   NOT NULL                                    COMMENT '所属入口',
-    `importUser`            BIGINT UNSIGNED   NOT NULL                                    COMMENT '名称',
-    `userName`              VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
-    `mechanism`             VARCHAR(64)       NOT NULL                                    COMMENT '类型',
-    `author`                VARCHAR(64)       NOT NULL                                    COMMENT '键名',
-    `industry`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '所属入口',
-    `indeustryName`         VARCHAR(64)       NOT NULL                                    COMMENT '名称',
-    `isPositive`            TINYINT UNSIGNED  NOT NULL DEFAULT ''                         COMMENT '描述',
-    `startTime`             TIMESTAMP         NOT NULL                                    COMMENT '类型',
-    `endTime`               TIMESTAMP         NOT NULL                                    COMMENT '键名',
-    `order`                 VARCHAR(128)      NOT NULL                                    COMMENT '所属入口',
-    `realReportName`        VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
-    `filePath`              VARCHAR(64)       NOT NULL                                    COMMENT '类型',
-    `reportSource`          INT UNSIGNED      NOT NULL                                    COMMENT '键名',
-    `reportUrl`             VARCHAR(64)       NOT NULL                                    COMMENT '所属入口',
-    `originalIndustry`      VARCHAR(64)       NOT NULL                                    COMMENT '名称',
+    `report_type`           VARCHAR(64)       NOT NULL                                    COMMENT '报告类型',
+    `report_type_name`      VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '报告类型名称',
+    `report_code`           VARCHAR(64)       NOT NULL                                    COMMENT '报告编码',
+    `report_name`           VARCHAR(64)       NOT NULL                                    COMMENT '报告名称',
+    `grade`                 VARCHAR(64)       NOT NULL                                    COMMENT '评级',
+    `wb_report_grade_id`    BIGINT UNSIGNED   NOT NULL                                    COMMENT '评级ID',
+    `report_title`          VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '报告标题',
+    `report_desc`           VARCHAR(1024)       NOT NULL                                    COMMENT '报告摘要页',
+    `report_keyword`        VARCHAR(64)       NOT NULL                                    COMMENT '报告关键字',
+    `rela_reportId`         BIGINT UNSIGNED   NOT NULL                                    COMMENT '关联文件ID',
+    `import_user`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '上传人ID',
+    `user_name`             VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '上传人用户名',
+    `mechanism`             VARCHAR(64)       NOT NULL                                    COMMENT '机构',
+    `author`                VARCHAR(64)       NOT NULL                                    COMMENT '作者',
+    `industry`              BIGINT UNSIGNED   NOT NULL                                    COMMENT '行业编码',
+    `industry_name`         VARCHAR(64)       NOT NULL                                    COMMENT '行业名称',
+    `is_positive`           TINYINT UNSIGNED  NOT NULL DEFAULT 0                          COMMENT '是否正序排列',
+    `start_time`            TIMESTAMP         NOT NULL                                    COMMENT '开始时间',
+    `end_time`              TIMESTAMP         NOT NULL                                    COMMENT '结束时间',
+    `order`                 VARCHAR(128)      NOT NULL                                    COMMENT '排序字段',
+    `real_report_ame`       VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '报告本地文件名',
+    `file_path`             VARCHAR(64)       NOT NULL                                    COMMENT '报告下载URL',
+    `report_source`         INT UNSIGNED      NOT NULL                                    COMMENT '报告来源 1系统上传 2邮箱获取 3数据库',
+    `report_url`            VARCHAR(512)       NOT NULL                                   COMMENT '报告链接',
+    `original_industry`     VARCHAR(64)       NOT NULL                                    COMMENT '原始行业',
 
     `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
     `ctime`                 TIMESTAMP         NOT NULL                                    COMMENT '创建时间',
@@ -58,9 +58,7 @@ CREATE TABLE wb_report (
     `updater`               BIGINT UNSIGNED   NOT NULL                                    COMMENT '更新者ID',
     `remark`                VARCHAR(1024)     NOT NULL DEFAULT ''                         COMMENT '备注，DBA操作使用',
 
-    PRIMARY KEY (`id`),
-    UNIQUE  KEY `name` (`name`),
-    INDEX       `type` (`type`) USING BTREE
+    PRIMARY KEY (`id`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='外部报告表';
 

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OutsideReportRemoting {
     void batchInsertOutsideReport(List<OutSideReportEntity> outsideReportEntityList, Long seq);
+
+    Long batchInsertOutsideReport(List<OutSideReportEntity> outsideReportEntityList);
 }

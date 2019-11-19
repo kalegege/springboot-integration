@@ -2,6 +2,7 @@ package com.wasu.springboot.integration.base.dao;
 
 import com.wasu.springboot.integration.entity.page.PageBean;
 import com.wasu.springboot.integration.entity.page.PageParam;
+import com.wasu.springboot.integration.entity.report.OutSideReportEntity;
 
 import java.util.List;
 import java.util.Map;

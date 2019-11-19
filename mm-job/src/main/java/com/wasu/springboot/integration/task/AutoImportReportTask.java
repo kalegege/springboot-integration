@@ -111,22 +111,23 @@ public class AutoImportReportTask implements SimpleJob {
             LOGGER.info("获取到的外部报告为空");
             return;
         }
-        String randomToken = UUIDGenerator.getUUID();
-        Long seq=null;
-        try{
-            if(lockService.tryLock(CacheKeyConstants.OUTSIDE_REPORT_BATCH_INSERT_KEY,randomToken, LockMode.WRITE,3000)){
-                seq=fileRemoting.getSequence();
-                fileRemoting.setSequence(seq+outSideReportEntityList.size() - CommonConstant.NUMBER_1);
-            }
-        }catch(Exception e){
-            LOGGER.error("autoImportReportTask:添加分布式锁失败");
-        }finally {
-            lockService.releaseLock(CacheKeyConstants.OUTSIDE_REPORT_BATCH_INSERT_KEY,randomToken);
-        }
-        if(seq != null){
-            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList,seq);
-        }
+//        String randomToken = UUIDGenerator.getUUID();
+//        Long seq=null;
+//        try{
+//            if(lockService.tryLock(CacheKeyConstants.OUTSIDE_REPORT_BATCH_INSERT_KEY,randomToken, LockMode.WRITE,3000)){
+//                seq=fileRemoting.getSequence();
+//                fileRemoting.setSequence(seq+outSideReportEntityList.size() - CommonConstant.NUMBER_1);
+//            }
+//        }catch(Exception e){
+//            LOGGER.error("autoImportReportTask:添加分布式锁失败");
+//        }finally {
+//            lockService.releaseLock(CacheKeyConstants.OUTSIDE_REPORT_BATCH_INSERT_KEY,randomToken);
+//        }
+//        if(seq != null){
+//            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList,seq);
+//        }
 
+        outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList);
     }
 
     @Override
