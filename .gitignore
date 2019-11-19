@@ -1,0 +1,26 @@
+# 忽略Idea生成的项目文件
+.idea/
+*.iml
+
+# 忽略eclipse的项目文件
+.project
+.classpath
+.settings/
+
+# 忽略所有target
+target/
+
+# 生成的war包全部忽略
+war/
+*.war
+
+# 忽略web工程下的lib与class文件
+*/WebContent/WEB-INF/classes/
+*/WebContent/WEB-INF/lib/
+
+# 忽略log文件
+*.log
+
+
+
+
