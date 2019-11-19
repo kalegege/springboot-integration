@@ -7,4 +7,7 @@ public class JobConstant {
 
     /** 每分钟一次**/
     public final static String JOB_EVERY_MINUTE_1="0 0/1 * * * ?";
+
+    /** 每十分钟一次**/
+    public final static String JOB_EVERY_10_MINUTE_1="0 0/10 * * * ?";
 }

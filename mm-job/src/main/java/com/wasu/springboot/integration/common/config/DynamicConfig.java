@@ -5,19 +5,19 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DynamicConfig {
-    @Value("${task.log.switch:on}")
+    @Value("${task.log.switch:off}")
     private String taskLogSwitch;
 
-    @Value("invest-research-gateway.appkey")
+    @Value("${invest-research-gateway.appkey}")
     private String gatewayAppkey;
 
-    @Value("invest-research-gateway.appsecret")
+    @Value("${invest-research-gateway.appsecret}")
     private String gatewayAppsecret;
 
-    @Value("invest-research-gateway.url")
+    @Value("${invest-research-gateway.url}")
     private String gatewayUrl;
 
-    @Value("mm-service.name")
+    @Value("${mm-service.name}")
     private String serviceName;
 
     public String getServiceName() {

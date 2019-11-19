@@ -3,7 +3,6 @@ package com.wasu.springboot.integration.remoting.outsideReport.impl;
 import com.wasu.springboot.integration.base.BaseRemoting;
 import com.wasu.springboot.integration.common.config.DynamicConfig;
 import com.wasu.springboot.integration.entity.report.OutSideReportEntity;
-import com.wasu.springboot.integration.entity.system.UserInfo;
 import com.wasu.springboot.integration.remoting.outsideReport.OutsideReportRemoting;
 import com.wasu.springboot.integration.utils.JSONUtils;
 import com.wasu.springboot.integration.utils.JsonResult;
@@ -29,7 +28,7 @@ public class OutsideReportRemotingImpl extends BaseRemoting implements OutsideRe
     public Long batchInsertOutsideReport(List<OutSideReportEntity> outsideReportEntityList) {
         Map<String,Object> param=new HashMap<>();
         param.put("outSideReportEntities",outsideReportEntityList);
-        String resultStr=postForObject(dynamicConfig.getServiceName(),"user/getUserInfoByUserId",param,String.class);
+        String resultStr=postForObject(dynamicConfig.getServiceName(),"outsideReport/batchInsert",param,String.class);
         JsonResult jsonResult=checkInvokeSuccess(resultStr);
         return JSONUtils.parseObject(jsonResult.getData() != null? jsonResult.getData().toString() : null, Long.class);
     }

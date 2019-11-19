@@ -50,5 +50,6 @@ public class TaskLogAop {
         }else{
 
         }
+        joinPoint.proceed();
     }
 }

@@ -8,10 +8,10 @@ public class DynamicConfig {
     @Value("${mm.name}")
     private String webServiceName;
 
-    @Value("mm-service.name")
+    @Value("${mm-service.name}")
     private String systemServiceName;
 
-    @Value("redis.shiro.prefix")
+    @Value("${redis.shiro.prefix}")
     private String sessionKeyPrefix;
 
     public String getWebServiceName() {

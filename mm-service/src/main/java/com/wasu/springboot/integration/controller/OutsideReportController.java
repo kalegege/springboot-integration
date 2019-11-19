@@ -4,9 +4,7 @@ import com.wasu.springboot.integration.entity.report.OutSideReportEntity;
 import com.wasu.springboot.integration.service.OutsideReportService;
 import com.wasu.springboot.integration.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,9 +27,11 @@ public class OutsideReportController {
     */
     @RequestMapping("batchInsert")
     @ResponseBody
-    public JsonResult batchInsert(List<OutSideReportEntity> outsideReportEntityList){
+    public JsonResult batchInsert(@RequestBody  List<OutSideReportEntity> outsideReportEntityList){
         JsonResult jsonResult=new JsonResult();
-        jsonResult.setData(this.outsideReportService.batchInsert(outsideReportEntityList));
+        if(null != outsideReportEntityList && outsideReportEntityList.size() > 0){
+            jsonResult.setData(this.outsideReportService.batchInsert(outsideReportEntityList));
+        }
         return jsonResult;
     }
 }
