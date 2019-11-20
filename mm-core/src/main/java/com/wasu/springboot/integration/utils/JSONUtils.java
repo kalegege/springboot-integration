@@ -25,7 +25,7 @@ public class JSONUtils {
     }
 
     public static <T> List<T> parseArray(JSONArray json,Class<T> clazz){
-        return json.toJavaList(clazz);
+            return json.toJavaList(clazz);
     }
 
     public static String toJsonString(Object object){

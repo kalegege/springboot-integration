@@ -1,6 +1,7 @@
 package com.wasu.springboot.integration.task;
 
 import com.alibaba.fastjson.JSONArray;
+import com.google.common.collect.Lists;
 import com.wasu.springboot.integration.common.batch.aop.TaskLogAnnotation;
 import com.wasu.springboot.integration.common.config.DynamicConfig;
 import com.wasu.springboot.integration.constants.CacheKeyConstants;
@@ -22,10 +23,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @Configurable
@@ -54,38 +52,16 @@ public class AutoImportReportTask implements SimpleJob {
         Map<String, Object> param=new HashMap<>();
         param.put("appkey",dynamicConfig.getGatewayAppkey());
         param.put("appsecret",dynamicConfig.getGatewayAppsecret());
-        String lastImportDateStr="2019-06-10 17:00:000";
+//        String lastImportDateStr="2019-11-10 17:00:000";
         Date now= DateUtils.getNow();
-        param.put("endTime",DateUtils.formate(now));
-        Date dateTime;
-        if(StringUtils.isNoneBlank(lastImportDateStr)){
-            dateTime=DateUtils.parseDateTime(lastImportDateStr);
-            if(DateUtils.getSubDay(now,dateTime) > 90){
-                param.put("startTime",DateUtils.formate(DateUtils.addOrSubDay(now,-90)));
-                param.put("isContainCtime",CommonConstant.NUMBER_1);
-            }else{
-                param.put("startTime",DateUtils.formate(now));
-            }
-        }else{
-            dateTime=DateUtils.addOrSubDay(now,-90);
-            param.put("startTime",dateTime);
-            param.put("isContainCtime",CommonConstant.NUMBER_1);
-        }
-        Integer dateNumber;
-        if((dateNumber=DateUtils.getSubDay(now,dateTime)) > CommonConstant.NUMBER_1){
-            for(int i=CommonConstant.NUMBER_0;i<dateNumber;i++){
-                param.put("startTime",DateUtils.formate(dateTime));
-                if((i+CommonConstant.NUMBER_1) == dateNumber){
-                    param.put("endTime",DateUtils.formate(now));
-                }else{
-                    param.put("endTime",DateUtils.formate(DateUtils.addOrSubDay(dateTime,CommonConstant.NUMBER_1)));
-                }
-                this.queryOutsideFromOutside(param);
-                dateTime=DateUtils.addOrSubDay(dateTime,CommonConstant.NUMBER_1);
-            }
-        }else{
-            this.queryOutsideFromOutside(param);
-        }
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(DateUtils.getNow());
+
+        param.put("endTime",DateUtils.formate(calendar.getTime()));
+        param.put("isContainCtime",CommonConstant.NUMBER_1);
+        calendar.add(Calendar.HOUR,-1);
+        param.put("startTime",DateUtils.formate(calendar.getTime()));
+        this.queryOutsideFromOutside(param);
 
         Long end = System.currentTimeMillis();
         LOGGER.info("end-----------------");
@@ -126,8 +102,15 @@ public class AutoImportReportTask implements SimpleJob {
 //        if(seq != null){
 //            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList,seq);
 //        }
-
-        outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList);
+        List<List<OutSideReportEntity>> partition= Lists.partition(outSideReportEntityList,20);
+       for(List<OutSideReportEntity> outSideReportEntities : partition){
+           outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
+           try {
+               Thread.sleep(1);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+       }
     }
 
     @Override
