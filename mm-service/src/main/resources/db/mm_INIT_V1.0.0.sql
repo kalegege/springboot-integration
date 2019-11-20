@@ -63,22 +63,27 @@ CREATE TABLE wb_report (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='外部报告表';
 
 
-CREATE TABLE t_treasure_role (
-    `id`                    BIGINT UNSIGNED   NOT NULL                                    COMMENT '主键',
-    `name`                  VARCHAR(64)       NOT NULL                                    COMMENT '名称,唯一不可重复',
-    `description`           VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '描述',
+CREATE TABLE sys_dictionary (
+    `data_type`             VARCHAR(64)       NOT NULL                                    COMMENT '数据类别',
+    `data_code`             VARCHAR(64)       NOT NULL                                    COMMENT '数据编码',
+    `data_value`            VARCHAR(128)      NOT NULL                                    COMMENT '数据值',
+    `sort_no`               INT UNSIGNED      NOT NULL DEFAULT 1                          COMMENT '排序',
+    `data_desc`             VARCHAR(128)      NOT NULL DEFAULT ''                         COMMENT '数据描述',
+    `parent_id`             BIGINT UNSIGNED   NOT NULL DEFAULT 0                          COMMENT '父ID',
 
-    `create_time`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '创建时间',
-    `creator`               VARCHAR(64)       NOT NULL                                    COMMENT '创建者',
-    `update_time`           BIGINT UNSIGNED   NOT NULL                                    COMMENT '更新时间',
-    `updater`               VARCHAR(64)       NOT NULL                                    COMMENT '更新者',
-    `deleted`               TINYINT UNSIGNED  NOT NULL DEFAULT 0                          COMMENT '是否逻辑删除',
+    `id`                    BIGINT UNSIGNED   NOT NULL AUTO_INCREMENT                     COMMENT '主键',
+    `ctime`                 TIMESTAMP         NOT NULL DEFAULT NOW()                      COMMENT '创建时间',
+    `mtime`                 TIMESTAMP         NOT NULL DEFAULT NOW()                      COMMENT '修改时间',
+    `rtime`                 TIMESTAMP         NOT NULL DEFAULT NOW()                      COMMENT '系统调整时间',
+    `isvalid`               INT UNSIGNED      NOT NULL DEFAULT 1                          COMMENT '是否游侠',
+    `creater`               BIGINT UNSIGNED                                               COMMENT '创建人ID',
+    `updater`               BIGINT UNSIGNED                                               COMMENT '更新者ID',
     `remark`                VARCHAR(1024)     NOT NULL DEFAULT ''                         COMMENT '备注，DBA操作使用',
 
     PRIMARY KEY (`id`),
-    UNIQUE  KEY `name` (`name`)
+    UNIQUE  KEY `data_code` (`data_code`)
 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='数据字典表';
 
 
 CREATE TABLE  t_treasure_access (

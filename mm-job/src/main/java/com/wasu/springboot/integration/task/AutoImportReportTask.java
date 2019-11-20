@@ -29,8 +29,8 @@ import java.util.*;
 @Configurable
 @EnableScheduling
 public class AutoImportReportTask implements SimpleJob {
-    private static final Logger LOGGER= LoggerFactory.getLogger(AutoImportReportTask.class);
-    private static final String url_last="/api/outsideReport/queryOutsideReport";
+    private static final Logger LOGGER = LoggerFactory.getLogger(AutoImportReportTask.class);
+    private static final String url_last = "/api/outsideReport/queryOutsideReport";
 
     @Autowired
     private DynamicConfig dynamicConfig;
@@ -49,41 +49,42 @@ public class AutoImportReportTask implements SimpleJob {
     public void execute(JobContext var1) {
         LOGGER.info("start---------------");
         Long start = System.currentTimeMillis();
-        Map<String, Object> param=new HashMap<>();
-        param.put("appkey",dynamicConfig.getGatewayAppkey());
-        param.put("appsecret",dynamicConfig.getGatewayAppsecret());
+        Map<String, Object> param = new HashMap<>();
+        param.put("appkey", dynamicConfig.getGatewayAppkey());
+        param.put("appsecret", dynamicConfig.getGatewayAppsecret());
 //        String lastImportDateStr="2019-11-10 17:00:000";
-        Date now= DateUtils.getNow();
-        Calendar calendar=Calendar.getInstance();
+        Date now = DateUtils.getNow();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(DateUtils.getNow());
 
-        param.put("endTime",DateUtils.formate(calendar.getTime()));
-        param.put("isContainCtime",CommonConstant.NUMBER_1);
-        calendar.add(Calendar.HOUR,-1);
-        param.put("startTime",DateUtils.formate(calendar.getTime()));
+        param.put("endTime", DateUtils.formate(calendar.getTime()));
+        param.put("isContainCtime", CommonConstant.NUMBER_1);
+        calendar.add(Calendar.HOUR, -1);
+        param.put("startTime", DateUtils.formate(calendar.getTime()));
         this.queryOutsideFromOutside(param);
 
         Long end = System.currentTimeMillis();
         LOGGER.info("end-----------------");
-        LOGGER.info("耗时:"+(start - end));
+        LOGGER.info("耗时:" + (start - end));
     }
 
     /**
      * 调用外部接口获取数据
+     *
      * @param param
      */
     private void queryOutsideFromOutside(Map<String, Object> param) {
-        String jsonResultJSon= HttpClientUtils.postForJson(dynamicConfig.getGatewayUrl()+url_last,param);
+        String jsonResultJSon = HttpClientUtils.postForJson(dynamicConfig.getGatewayUrl() + url_last, param);
         JsonResult jsonResult;
-        if(StringUtils.isBlank(jsonResultJSon) || (jsonResult=JSONUtils.parseObject(jsonResultJSon,JsonResult.class)) == null || jsonResult.getCode() != CommonConstant.NUMBER_1){
+        if (StringUtils.isBlank(jsonResultJSon) || (jsonResult = JSONUtils.parseObject(jsonResultJSon, JsonResult.class)) == null || jsonResult.getCode() != CommonConstant.NUMBER_1) {
             throw new ServiceException("获取外部报告失败");
         }
-        if(jsonResult.getData() == null){
+        if (jsonResult.getData() == null) {
             LOGGER.info("获取到的外部报告为空");
             return;
         }
-        List<OutSideReportEntity> outSideReportEntityList= JSONUtils.parseArray((JSONArray) jsonResult.getData(), OutSideReportEntity.class);
-        if(CollectionUtils.isEmpty(outSideReportEntityList)){
+        List<OutSideReportEntity> outSideReportEntityList = JSONUtils.parseArray((JSONArray) jsonResult.getData(), OutSideReportEntity.class);
+        if (CollectionUtils.isEmpty(outSideReportEntityList)) {
             LOGGER.info("获取到的外部报告为空");
             return;
         }
@@ -102,15 +103,15 @@ public class AutoImportReportTask implements SimpleJob {
 //        if(seq != null){
 //            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList,seq);
 //        }
-        List<List<OutSideReportEntity>> partition= Lists.partition(outSideReportEntityList,20);
-       for(List<OutSideReportEntity> outSideReportEntities : partition){
-           outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
-           try {
-               Thread.sleep(1);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-       }
+        List<List<OutSideReportEntity>> partition = Lists.partition(outSideReportEntityList, 20);
+        for (List<OutSideReportEntity> outSideReportEntities : partition) {
+            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

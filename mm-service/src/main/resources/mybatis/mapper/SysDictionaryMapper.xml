@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wasu.springboot.integration.dao.impl.SysDictionaryDaoImpl">
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO sys_file_info(
+        id,ctime,creater,mtime,updater,isvalid,file_type,file_name,file_path,file_group,file_size,orgid
+        )VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id},now(),#{item.creater},now(),#{item.creater},1,#{item.fileType},#{item.fileName},#{item.filePath},#{item.fileGroup},#{item.fileSize},#{item.orgId}
+            )
+        </foreach>
+    </insert>
+</mapper>
