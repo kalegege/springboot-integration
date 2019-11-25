@@ -1,4 +1,4 @@
-package com.wasu.springboot.integration.base.dao;
+package com.wasu.springboot.integration.dao;
 
 import com.wasu.springboot.integration.entity.page.PageBean;
 import com.wasu.springboot.integration.entity.page.PageParam;

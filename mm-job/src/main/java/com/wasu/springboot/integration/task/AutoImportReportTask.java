@@ -14,6 +14,7 @@ import com.wasu.springboot.integration.lock.LockMode;
 import com.wasu.springboot.integration.lock.LockService;
 import com.wasu.springboot.integration.remoting.file.FileRemoting;
 import com.wasu.springboot.integration.remoting.outsideReport.OutsideReportRemoting;
+import com.wasu.springboot.integration.report.service.OutsideReportService;
 import com.wasu.springboot.integration.utils.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -44,6 +45,9 @@ public class AutoImportReportTask implements SimpleJob {
     @Autowired
     private OutsideReportRemoting outsideReportRemoting;
 
+    @Autowired
+    private OutsideReportService outsideReportService;
+
     @Override
     @TaskLogAnnotation(taskName = "autoImportReportTask")
     public void execute(JobContext var1) {
@@ -52,8 +56,6 @@ public class AutoImportReportTask implements SimpleJob {
         Map<String, Object> param = new HashMap<>();
         param.put("appkey", dynamicConfig.getGatewayAppkey());
         param.put("appsecret", dynamicConfig.getGatewayAppsecret());
-//        String lastImportDateStr="2019-11-10 17:00:000";
-        Date now = DateUtils.getNow();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(DateUtils.getNow());
 
@@ -103,9 +105,14 @@ public class AutoImportReportTask implements SimpleJob {
 //        if(seq != null){
 //            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList,seq);
 //        }
+        //直接插入
+        outsideReportService.batchInsert(outSideReportEntityList);
+
+        //每20条插入一次
         List<List<OutSideReportEntity>> partition = Lists.partition(outSideReportEntityList, 20);
         for (List<OutSideReportEntity> outSideReportEntities : partition) {
-            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
+            outsideReportService.batchInsert(outSideReportEntities);
+//            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

@@ -29,5 +29,6 @@
 
     <mappers>
 <!--        <mapper resource="mybatis/mapper/FileMapper.xml"/>-->
+        <mapper resource="mybatis/mapper/OutsideReportMapper.xml"/>
     </mappers>
 </configuration>
