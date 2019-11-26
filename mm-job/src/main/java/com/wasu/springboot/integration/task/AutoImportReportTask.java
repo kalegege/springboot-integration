@@ -106,13 +106,13 @@ public class AutoImportReportTask implements SimpleJob {
 //            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntityList,seq);
 //        }
         //直接插入
-        outsideReportService.batchInsert(outSideReportEntityList);
+//        outsideReportService.batchInsert(outSideReportEntityList);
 
         //每20条插入一次
         List<List<OutSideReportEntity>> partition = Lists.partition(outSideReportEntityList, 20);
         for (List<OutSideReportEntity> outSideReportEntities : partition) {
-            outsideReportService.batchInsert(outSideReportEntities);
-//            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
+//            outsideReportService.batchInsert(outSideReportEntities);
+            outsideReportRemoting.batchInsertOutsideReport(outSideReportEntities);
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

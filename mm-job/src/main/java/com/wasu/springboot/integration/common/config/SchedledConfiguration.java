@@ -1,11 +1,13 @@
 package com.wasu.springboot.integration.common.config;
 
+import com.netflix.discovery.converters.Auto;
 import com.wasu.springboot.integration.constants.JobConstant;
 import com.wasu.springboot.integration.job.JobQuartzAdapterService;
 import com.wasu.springboot.integration.job.api.SimpleJob;
 import com.wasu.springboot.integration.job.filter.JobFilter;
 import com.wasu.springboot.integration.job.impl.SequenceJobGroupServiceImpl;
 import com.wasu.springboot.integration.task.AutoImportReportTask;
+import com.wasu.springboot.integration.task.CommonJsTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,9 @@ public class SchedledConfiguration {
 
     @Autowired
     private AutoImportReportTask autoImportReportTask;
+
+    @Autowired
+    private CommonJsTask commonJsTask;
 
     private static final int COREPOOLSIZE=10;
     private static final int MAXPOOLSIZE=100;

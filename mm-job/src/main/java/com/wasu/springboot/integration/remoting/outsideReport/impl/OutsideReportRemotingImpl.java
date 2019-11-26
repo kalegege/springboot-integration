@@ -38,13 +38,13 @@ public class OutsideReportRemotingImpl extends BaseRemoting implements OutsideRe
         param.put("outsideReportEntityList", JSONUtils.toJsonString(outsideReportEntityList));
 //        param.put("outsideReportEntityList", outsideReportEntityList);
 
-        List<ServiceInstance> serviceInstanceList=discoveryClient.getInstances(dynamicConfig.getServiceName());
-        if(null != serviceInstanceList && serviceInstanceList.size() > 0){
-            ServiceInstance target = serviceInstanceList.get(0);
-            String result=HttpClientUtils.postForJson(target.getUri()+"/outsideReport/batchInsert",param);
-            return StringUtils.isNotBlank(result)?1L:0L;
-        }
-        String resultStr=postForObject(dynamicConfig.getServiceName(),"outsideReport/batchInsertList",param,String.class);
+//        List<ServiceInstance> serviceInstanceList=discoveryClient.getInstances(dynamicConfig.getServiceName());
+//        if(null != serviceInstanceList && serviceInstanceList.size() > 0){
+//            ServiceInstance target = serviceInstanceList.get(0);
+//            String result=HttpClientUtils.postForJson(target.getUri()+"/outsideReport/batchInsert",param);
+//            return StringUtils.isNotBlank(result)?1L:0L;
+//        }
+        String resultStr=postForObject(dynamicConfig.getServiceName(),"outsideReport/batchInsert",param,String.class);
         JsonResult jsonResult=checkInvokeSuccess(resultStr);
         return JSONUtils.parseObject(jsonResult.getData() != null? jsonResult.getData().toString() : null, Long.class);
     }

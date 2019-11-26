@@ -4,6 +4,7 @@ import com.wasu.springboot.integration.exceptions.BaseCoreException;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -222,7 +223,7 @@ public class HttpClientUtils {
         CloseableHttpClient httpClient = null;
         CloseableHttpResponse response = null;
         HttpPost post = new HttpPost(url);
-        List<BasicNameValuePair> nvp = new ArrayList<>();
+        List<NameValuePair> nvp = new ArrayList<>();
 
         if (null != params && !params.isEmpty()) {
             for (Map.Entry<String, Object> current : params.entrySet()) {
@@ -259,7 +260,7 @@ public class HttpClientUtils {
                 }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
             abort(post);
             close(httpClient, response);

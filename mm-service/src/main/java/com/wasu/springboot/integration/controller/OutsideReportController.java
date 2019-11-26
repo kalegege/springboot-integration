@@ -1,6 +1,7 @@
 package com.wasu.springboot.integration.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wasu.springboot.integration.entity.Task.TaskDO;
 import com.wasu.springboot.integration.entity.report.OutSideReportEntity;
 import com.wasu.springboot.integration.entity.report.OutsideReportEntityList;
 import com.wasu.springboot.integration.service.OutsideReportService;
@@ -60,11 +61,24 @@ public class OutsideReportController {
     }
 
 
+    @RequestMapping("pushMessage")
+    @ResponseBody
+    public JsonResult pushMessage(@RequestParam("targetList") List<String> targetList) {
+        System.out.println("获取到pushMessage请求：---------------" );
+        targetList.forEach(s -> System.out.println(s));
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setData("success");
+        return jsonResult;
+    }
+
     @RequestMapping("test")
     @ResponseBody
     public JsonResult test() {
         JsonResult jsonResult = new JsonResult();
-        jsonResult.setData("success");
+        TaskDO result=new TaskDO();
+        result.setName("test");
+        System.out.println("获取到test请求：---------------" );
+        jsonResult.setData(result);
         return jsonResult;
     }
 }
