@@ -62,7 +62,7 @@ public class SchedledConfiguration {
     public JobQuartzAdapterService everyDay0100ConcurrentJobGroupService(){
         SequenceJobGroupServiceImpl jobGroupService=new SequenceJobGroupServiceImpl();
         List<SimpleJob> listSimpleJob=new ArrayList<>();
-        listSimpleJob.add(autoImportReportTask);
+        listSimpleJob.add(commonJsTask);
         jobGroupService.setListJobGroup(listSimpleJob);
 
         List<JobFilter> listJobFilter =new ArrayList<>();
