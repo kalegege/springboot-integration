@@ -21,7 +21,7 @@
 		<spring-cloud-contract.version>1.1.2.RELEASE</spring-cloud-contract.version>
 		<spring-cloud-commons.version>1.1.2.RELEASE</spring-cloud-commons.version>
 		<spring-retry.version>1.2.1.RELEASE</spring-retry.version>
-		<shiro.version>1.2.6</shiro.version>
+		<shiro.version>1.9.1</shiro.version>
 		<mysql.version>8.0.11</mysql.version>
 		<pinyin.version>2.5.1</pinyin.version>
 		<druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
